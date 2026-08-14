@@ -17,32 +17,32 @@ Admin panel (Angular) that consumes restaurants-api's protected routes. Agreed m
 ```
 src/app/
 ├── core/
-│   ├── services/
-│   ├── guards/
-│   └── interceptors/
+│   ├── auth-interceptor.ts
+│   ├── error-interceptor.ts
+│   └── auth-guard.ts
 ├── features/
 │   ├── login/
 │   │   └── login.ts
 │   ├── restaurants/
 │   │   ├── restaurant-list.ts        (orchestrates the page)
-│   │   └── components/
-│   │       ├── restaurant-table.ts
-│   │       └── restaurant-search-bar.ts
+│   │   ├── restaurant-table.ts
+│   │   └── restaurant-search-bar.ts
 │   ├── categories/
 │   │   ├── category-list.ts
-│   │   └── components/
-│   │       └── category-form.ts      (reused for create and edit)
+│   │   └── category-form.ts          (reused for create and edit)
 │   └── dishes/
 │       ├── dish-list.ts
-│       └── components/
-│           └── dish-form.ts          (reused for create and edit)
+│       └── dish-form.ts              (reused for create and edit)
 └── shared/
 ```
 
-- Each folder under `features/` = one screen or flow, with standalone components inside (no NgModules)
-- **Rule for splitting a feature into subcomponents**: split when the page has pieces with their own logic or state that can be isolated (whether reused or not — a table, a search bar, a form). Keep a single component when the flow is simple with no natural parts to separate (e.g. login). The goal is keeping each component to a single responsibility (SOLID) and not duplicating logic across screens (DRY), not splitting for its own sake
-- No `Component`/`.component` suffix on files or classes (current Angular style guide): `restaurant-list.ts` → `class RestaurantList`, not `restaurant-list.component.ts` → `RestaurantListComponent`
-- Always name by feature, never generic: `RestaurantList`/`RestaurantTable`, not `List`/`Table`. Without the suffix, this also avoids name collisions across folders (two `list.ts` files in different features)
+- No subfolders by file type (`services/`, `guards/`, `interceptors/`, `components/`) — current official Angular style guide advises against this (angular.dev/style-guide). Group only by feature/theme; only add a sub-directory if a feature grows too large, and split by sub-theme, not by type
+- A component's TS, HTML, and style files share the same base name and sit as siblings (`restaurant-list.ts`, `.html`, `.scss`). Test files (`.spec.ts`) do too — never a separate `tests/` folder
+- Each folder under `features/` = one screen or flow, with standalone components as sibling files inside (no NgModules)
+- **Rule for splitting a feature into multiple files**: split when the page has pieces with their own logic or state that can be isolated (whether reused or not — a table, a search bar, a form). Keep a single component when the flow is simple with no natural parts to separate (e.g. login). The goal is keeping each component to a single responsibility (SOLID) and not duplicating logic across screens (DRY), not splitting for its own sake
+- Components: no `Component`/`.component` suffix on files or classes: `restaurant-list.ts` → `class RestaurantList`, not `restaurant-list.component.ts` → `RestaurantListComponent`
+- Guards/interceptors: keep a hyphenated suffix — dropping it would make the file too generic to identify at a glance: `auth-interceptor.ts` → `const authInterceptor`, `auth-guard.ts` → `const authGuard`
+- Always name by feature, never generic: `RestaurantList`/`RestaurantTable`, not `List`/`Table`. This also avoids name collisions across folders (two `list.ts` files in different features)
 
 ## Backend (restaurants-api)
 
