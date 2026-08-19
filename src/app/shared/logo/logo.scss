@@ -1,0 +1,27 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 3rem 0 1rem;
+  svg {
+    width: calc(var(--logo-width) * 1px);
+    height: auto;
+    path {
+      stroke: var(--text);
+    }
+    circle {
+      fill: var(--primary);
+    }
+  }
+
+  span {
+    align-self: center;
+    padding-top: calc(var(--logo-width) * 1px * 0.4 * 0.75);
+    font-size: calc(var(--logo-width) * 1px * 0.4);
+    font-family: var(--font-title);
+    letter-spacing: 1px;
+    .logo-accent {
+      color: var(--primary);
+    }
+  }
+}
