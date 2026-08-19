@@ -1,0 +1,13 @@
+:host {
+  flex-shrink: 0;
+}
+
+.danger-icon {
+  display: flex;
+  align-items: center;
+  color: var(--text-danger);
+  svg {
+    height: auto;
+    width: calc(var(--icon-width) * 1px);
+  }
+}
