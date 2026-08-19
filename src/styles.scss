@@ -1,1 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* Brand */
+  --primary: #c4633e;
+
+  /* Bg */
+  --bg: #f7f1ea;
+  --bg-secondary: #fdfaf7;
+
+  /* Text */
+  --text: #332c27;
+  --text-muted: #7c716a;
+  --text-on-primary: #ffffff;
+  --text-on-dark: #fbf7f2;
+  --font-title: 'Newsreader', Georgia, serif;
+  --font: 'Work Sans', system-ui, sans-serif;
+
+  /* Border */
+  --border: #dcd5ce;
+}
+
+[data-theme='dark'] {
+  /* Brand */
+  --primary: #e6845a;
+
+  /* Bg */
+  --bg: #241f1c;
+  --bg-secondary: #2f2926;
+
+  /* Text */
+  --text: #f4ede6;
+  --text-muted: #a0938a;
+  --text-on-primary: #2b1a12;
+  --text-on-dark: #fbf7f2;
+
+  /* Border */
+  --border: #423a35;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
