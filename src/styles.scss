@@ -5,10 +5,12 @@
   /* Bg */
   --bg: #f7f1ea;
   --bg-secondary: #fdfaf7;
+  --bg-danger: #f8eae6;
 
   /* Text */
   --text: #332c27;
   --text-muted: #7c716a;
+  --text-danger: #8e3527;
   --text-on-primary: #ffffff;
   --text-on-dark: #fbf7f2;
   --font-title: 'Newsreader', Georgia, serif;
@@ -16,6 +18,7 @@
 
   /* Border */
   --border: #dcd5ce;
+  --border-danger: #e3c4bc;
 }
 
 [data-theme='dark'] {
@@ -25,15 +28,19 @@
   /* Bg */
   --bg: #241f1c;
   --bg-secondary: #2f2926;
+  --bg-danger: #3a1c17;
 
   /* Text */
   --text: #f4ede6;
   --text-muted: #a0938a;
+  --text-danger: #f3b4a6;
+
   --text-on-primary: #2b1a12;
   --text-on-dark: #fbf7f2;
 
   /* Border */
   --border: #423a35;
+  --border-danger: #6b3227;
 }
 
 * {
