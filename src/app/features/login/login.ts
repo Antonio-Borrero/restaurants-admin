@@ -40,11 +40,13 @@ export class Login {
       next: () => this.router.navigate(['/']),
       error: (err: HttpErrorResponse) => {
         if (err.error?.error?.code === 'INVALID_CREDENTIALS') {
-          this.error.set('Credenciales inválidas');
+          this.error.set('Correo o contraseña incorrectos. Revisa los datos e inténtalo de nuevo');
           return;
         }
         if (err.error?.error?.code === 'VALIDATION_ERROR') {
-          this.error.set('Correo o contraseña incorrectos. Revisa los datos e inténtalo de nuevo');
+          this.error.set(
+            'Correo o contraseña no tienen un formato válido. Revisa los datos e inténtalo de nuevo',
+          );
           return;
         }
         this.error.set(
