@@ -19,7 +19,7 @@
   flex-direction: column;
   padding: 2.5rem 6rem 2.5rem 1rem;
   .login-heading {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     font-size: 1.3rem;
     font-family: var(--font-title);
     font-weight: 500;
@@ -37,6 +37,22 @@
   form {
     display: flex;
     flex-direction: column;
+
+    .error {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem;
+      border-radius: 10px;
+      background: var(--bg-danger);
+      border: 1px solid var(--border-danger);
+      color: var(--text-danger);
+      font-size: 0.8rem;
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+
     label {
       margin: 0.5rem 0;
       font-size: 0.8rem;
@@ -101,7 +117,6 @@
     font-weight: 500;
     line-height: 1.2;
     color: var(--text-on-dark);
-    text-wrap: pretty;
   }
 }
 

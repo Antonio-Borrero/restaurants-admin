@@ -7,10 +7,11 @@ import { Logo } from '../../shared/logo/logo';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { DangerIcon } from '../../shared/danger-icon/danger-icon';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, Logo],
+  imports: [ReactiveFormsModule, Logo, DangerIcon],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -37,11 +38,20 @@ export class Login {
     const { email, password } = this.form.getRawValue();
     return this.auth.login(email, password).subscribe({
       next: () => this.router.navigate(['/']),
-      error: (err: HttpErrorResponse) =>
+      error: (err: HttpErrorResponse) => {
+        if (err.error?.error?.code === 'INVALID_CREDENTIALS') {
+          this.error.set('Credenciales inválidas');
+          return;
+        }
+        if (err.error?.error?.code === 'VALIDATION_ERROR') {
+          this.error.set('Correo o contraseña incorrectos. Revisa los datos e inténtalo de nuevo');
+          return;
+        }
         this.error.set(
           err.error?.error?.message ??
             'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
-        ),
+        );
+      },
     });
   }
 }

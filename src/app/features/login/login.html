@@ -8,7 +8,7 @@
       </div>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         @if (error()) {
-          <p>{{ error() }}</p>
+          <p class="error"><app-danger-icon [width]="25" />{{ error() }}</p>
         }
         <label for="email">Correo:</label>
         <input
