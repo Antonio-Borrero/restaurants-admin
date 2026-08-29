@@ -37,7 +37,7 @@ export class Login {
   onSubmit() {
     const { email, password } = this.form.getRawValue();
     return this.auth.login(email, password).subscribe({
-      next: () => this.router.navigate(['/']),
+      next: () => this.router.navigate(['/restaurants']),
       error: (err: HttpErrorResponse) => {
         if (err.error?.error?.code === 'INVALID_CREDENTIALS') {
           this.error.set('Correo o contraseña incorrectos. Revisa los datos e inténtalo de nuevo');
