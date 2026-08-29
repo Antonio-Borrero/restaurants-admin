@@ -1,0 +1,21 @@
+<main>
+  <section>
+    @for (restaurant of restaurantsList(); track restaurant.id) {
+      <article>
+        <img [src]="restaurant.imageUrl" alt="Imagen del restaurante" />
+        <div>
+          <div>
+            <div>
+              <p>{{ restaurant.name }}</p>
+              <p>{{ restaurant.categoryCount }} categorías · {{ restaurant.dishCount }} platos</p>
+            </div>
+            <div>
+              {{ restaurant.role }}
+            </div>
+          </div>
+          <div><button>Ver carta</button><button>Editar</button></div>
+        </div>
+      </article>
+    }
+  </section>
+</main>
