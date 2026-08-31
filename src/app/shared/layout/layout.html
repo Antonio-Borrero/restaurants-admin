@@ -1,8 +1,10 @@
 <main>
-  <header>
-    <app-logo [width]="80" />
-    <span>Correo</span>
-    <button>Cerrar sesión</button>
+  <header class="layout-header">
+    <app-logo [width]="60" />
+    <div class="email-logout">
+      <span>{{ email() }}</span>
+      <button (click)="logout()">Cerrar sesión</button>
+    </div>
   </header>
   <router-outlet />
 </main>
