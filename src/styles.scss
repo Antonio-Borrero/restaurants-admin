@@ -19,6 +19,19 @@
   /* Border */
   --border: #dcd5ce;
   --border-danger: #e3c4bc;
+
+  /* Hover */
+  --hover-primary: #b05534;
+  --hover-transparent: #f7e2d6;
+  --hover-border: #e2b39c;
+  --hover-text: var(--primary);
+
+  --hover-danger: #a83c33;
+  --hover-transparent-danger: #fbeeeb;
+  --hover-border-danger: #d8a79d;
+
+  --hover-surface: #f2ece4;
+  --hover-shadow: 0 6px 20px rgba(51, 44, 39, 0.09);
 }
 
 [data-theme='dark'] {
@@ -41,6 +54,19 @@
   /* Border */
   --border: #423a35;
   --border-danger: #6b3227;
+
+  /* Hover */
+  --hover-primary: #f09a75;
+  --hover-transparent: #453024;
+  --hover-border: #6d5647;
+  --hover-text: var(--primary);
+
+  --hover-danger: #f7c6ba;
+  --hover-transparent-danger: #47231d;
+  --hover-border-danger: #83402f;
+
+  --hover-surface: #383029;
+  --hover-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
 * {
