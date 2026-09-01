@@ -1,10 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { RestaurantsService } from './restaurants-service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { InitialsPipe } from './initials-pipe';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-restaurants',
-  imports: [],
+  imports: [InitialsPipe, UpperCasePipe],
   templateUrl: './restaurants.html',
   styleUrl: './restaurants.scss',
 })

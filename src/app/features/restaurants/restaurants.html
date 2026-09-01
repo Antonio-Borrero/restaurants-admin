@@ -34,7 +34,13 @@
     @for (restaurant of restaurantsList(); track restaurant.id) {
       <li class="restaurant-card">
         <article>
-          <img [src]="restaurant.imageUrl" alt="Imagen del restaurante" />
+          @if (restaurant.imageUrl) {
+            <img [src]="restaurant.imageUrl" alt="Imagen del restaurante" />
+          } @else {
+            <div class="restaurant-card-image-placeholder">
+              {{ restaurant.name | Initials | uppercase }}
+            </div>
+          }
           <div class="restaurant-card-body">
             <div class="restaurant-card-header">
               <div>
