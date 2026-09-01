@@ -1,21 +1,57 @@
-<main>
-  <section>
+<div>
+  <header class="restaurants-header">
+    <div>
+      <h1>Tus restaurantes</h1>
+      <p>Restaurantes a los que estás asociado</p>
+    </div>
+    <div class="restaurants-options">
+      <div class="view-toggle">
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 16 16">
+            <path d="M0 0h16v16H0z" fill="none" />
+            <path
+              fill="currentColor"
+              d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5z"
+            />
+          </svg>
+        </button>
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              fill="currentColor"
+              fill-rule="evenodd"
+              d="M3.5 5a1 1 0 0 0 0 2h17a1 1 0 1 0 0-2zm-1 7a1 1 0 0 1 1-1h17a1 1 0 1 1 0 2h-17a1 1 0 0 1-1-1m0 6.001a1 1 0 0 1 1-1h17a1 1 0 1 1 0 2h-17a1 1 0 0 1-1-1"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+      <button class="new-restaurant">+ Nuevo restaurante</button>
+    </div>
+  </header>
+  <ul class="restaurants-grid">
     @for (restaurant of restaurantsList(); track restaurant.id) {
-      <article>
-        <img [src]="restaurant.imageUrl" alt="Imagen del restaurante" />
-        <div>
-          <div>
-            <div>
-              <p>{{ restaurant.name }}</p>
-              <p>{{ restaurant.categoryCount }} categorías · {{ restaurant.dishCount }} platos</p>
+      <li class="restaurant-card">
+        <article>
+          <img [src]="restaurant.imageUrl" alt="Imagen del restaurante" />
+          <div class="restaurant-card-body">
+            <div class="restaurant-card-header">
+              <div>
+                <h2>{{ restaurant.name }}</h2>
+                <p>{{ restaurant.categoryCount }} categorías · {{ restaurant.dishCount }} platos</p>
+              </div>
+              <div class="role">
+                {{ restaurant.role }}
+              </div>
             </div>
-            <div>
-              {{ restaurant.role }}
+            <div class="restaurant-card-actions">
+              <button class="menu-button">Ver carta</button>
+              <button class="edit-button">Editar</button>
             </div>
           </div>
-          <div><button>Ver carta</button><button>Editar</button></div>
-        </div>
-      </article>
+        </article>
+      </li>
     }
-  </section>
-</main>
+  </ul>
+</div>
