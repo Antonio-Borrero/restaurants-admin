@@ -6,7 +6,7 @@
     </div>
     <div class="restaurants-options">
       <div class="view-toggle">
-        <button>
+        <button (click)="changeViewMode('grid')" [class.active]="viewMode() === 'grid'">
           <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 16 16">
             <path d="M0 0h16v16H0z" fill="none" />
             <path
@@ -15,7 +15,7 @@
             />
           </svg>
         </button>
-        <button>
+        <button (click)="changeViewMode('list')" [class.active]="viewMode() === 'list'">
           <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24">
             <path d="M0 0h24v24H0z" fill="none" />
             <path
@@ -27,39 +27,93 @@
           </svg>
         </button>
       </div>
-      <button class="new-restaurant">+ Nuevo restaurante</button>
+      <button class="btn btn-primary new-restaurant">+ Nuevo restaurante</button>
     </div>
   </header>
-  <ul class="restaurants-grid">
-    @for (restaurant of restaurantsList(); track restaurant.id) {
-      <li class="restaurant-card">
-        <article>
-          @if (restaurant.imageUrl) {
-            <img [src]="restaurant.imageUrl" alt="Imagen del restaurante" />
-          } @else {
-            <div class="restaurant-card-image-placeholder">
-              {{ restaurant.name | Initials | uppercase }}
+  @if (viewMode() === 'grid') {
+    <ul class="restaurants-grid">
+      @for (restaurant of restaurantsList(); track restaurant.id) {
+        <li class="restaurant-card">
+          <article>
+            @if (restaurant.imageUrl) {
+              <img [src]="restaurant.imageUrl" alt="Imagen del restaurante" />
+            } @else {
+              <div class="restaurant-card-image-placeholder">
+                {{ restaurant.name | Initials | uppercase }}
+              </div>
+            }
+            <div class="restaurant-card-body">
+              <div class="restaurant-card-header">
+                <div>
+                  <h2>{{ restaurant.name }}</h2>
+                  <p>
+                    {{ restaurant.categoryCount }} categorías · {{ restaurant.dishCount }} platos
+                  </p>
+                </div>
+                <div class="role">
+                  {{ restaurant.role }}
+                </div>
+              </div>
+              <div class="restaurant-actions">
+                <button class="btn btn-primary grid-menu-button">Ver carta</button>
+                <button class="btn btn-secondary">Editar</button>
+              </div>
             </div>
-          }
-          <div class="restaurant-card-body">
-            <div class="restaurant-card-header">
+          </article>
+        </li>
+      } @empty {
+        <p class="no-restaurants">No hay restaurantes disponibles</p>
+      }
+    </ul>
+  } @else {
+    <table class="restaurants-table">
+      <thead class="restaurants-table-header">
+        <tr>
+          <th scope="col">Restaurante</th>
+          <th scope="col">Rol</th>
+          <th scope="col">Carta</th>
+          <th scope="col" class="restaurant-list-header-actions">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="restaurants-table-body">
+        @for (restaurant of restaurantsList(); track restaurant.id) {
+          <tr>
+            <td class="restaurant">
+              @if (restaurant.imageUrl) {
+                <img [src]="restaurant.imageUrl" alt="Imagen del restaurante" />
+              } @else {
+                <div class="restaurant-card-image-placeholder">
+                  {{ restaurant.name | Initials | uppercase }}
+                </div>
+              }
               <div>
                 <h2>{{ restaurant.name }}</h2>
-                <p>{{ restaurant.categoryCount }} categorías · {{ restaurant.dishCount }} platos</p>
+                <p>{{ restaurant.description }}</p>
               </div>
+            </td>
+            <td>
               <div class="role">
                 {{ restaurant.role }}
               </div>
-            </div>
-            <div class="restaurant-card-actions">
-              <button class="menu-button">Ver carta</button>
-              <button class="edit-button">Editar</button>
-            </div>
-          </div>
-        </article>
-      </li>
-    } @empty {
-      <p class="no-restaurants">No hay restaurantes disponibles</p>
-    }
-  </ul>
+            </td>
+            <td class="restaurant-details">
+              {{ restaurant.categoryCount }} categorías · {{ restaurant.dishCount }} platos
+            </td>
+            <td>
+              <div class="restaurant-actions">
+                <button class="btn btn-primary">Ver carta</button>
+                <button class="btn btn-secondary">Editar</button>
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="4">
+              <p class="no-restaurants">No hay restaurantes disponibles</p>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
 </div>

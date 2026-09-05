@@ -42,7 +42,7 @@
           color: var(--primary);
         }
 
-        &:active {
+        &.active {
           background-color: var(--bg-secondary);
           color: var(--primary);
         }
@@ -51,18 +51,6 @@
 
     .new-restaurant {
       padding: 0.8rem 1rem;
-      background: var(--primary);
-      cursor: pointer;
-      border: none;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      font-family: var(--font);
-      font-weight: 600;
-      color: var(--text-on-primary);
-      &:hover {
-        box-shadow: var(--hover-shadow);
-        background: var(--hover-primary);
-      }
     }
   }
 }
@@ -110,81 +98,130 @@
       flex-direction: column;
       gap: 1rem;
       padding: 1rem;
+
+      .restaurant-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h2 {
+          font-size: 1rem;
+          font-weight: 600;
+        }
+
+        p {
+          margin-top: 0.3rem;
+          font-size: 0.8rem;
+          color: var(--text-muted);
+        }
+      }
+    }
+  }
+}
+
+.restaurants-table {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  font-family: var(--font);
+  width: 100%;
+  background: var(--bg-secondary);
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  .restaurants-table-header {
+    color: var(--text-muted);
+    background: var(--bg);
+
+    th {
+      padding: 1rem;
+      background: var(--bg);
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      background: var(--bg);
     }
 
-    .restaurant-card-header {
+    .restaurant-list-header-actions {
+      text-align: right;
+      padding-right: 1.5rem;
+    }
+  }
+
+  .restaurants-table-body {
+    td {
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .restaurant {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 1rem;
+
+      img {
+        width: 3rem;
+        height: 3rem;
+        object-fit: cover;
+        border-radius: 0.5rem;
+      }
+
+      .restaurant-card-image-placeholder {
+        background: var(--bg-dark);
+        padding: 1rem;
+        border-radius: 10px;
+        font-weight: 600;
+        color: var(--text-muted);
+        font-size: 1.5rem;
+      }
+
       h2 {
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 600;
       }
 
       p {
         margin-top: 0.3rem;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         color: var(--text-muted);
       }
-
-      .role {
-        display: inline-block;
-        padding: 4px 9px;
-        background: var(--bg-pills);
-        border-radius: 999px;
-        font-size: 11px;
-        font-weight: 700;
-        color: var(--text-on-pills);
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-      }
     }
 
-    .restaurant-card-actions {
-      display: flex;
-      gap: 0.8rem;
-      .menu-button {
-        flex: 1;
-        padding: 0.5rem 1rem;
-        background: var(--primary);
-        cursor: pointer;
-        border: 1px solid var(--primary);
-        border-radius: 10px;
-        font-size: 0.8rem;
-        font-family: var(--font);
-        font-weight: 600;
-        color: var(--text-on-primary);
-        &:hover {
-          box-shadow: var(--hover-shadow);
-          background: var(--hover-primary);
-        }
-      }
-
-      .edit-button {
-        padding: 0.5rem 1rem;
-        background: transparent;
-        cursor: pointer;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        font-size: 0.8rem;
-        font-family: var(--font);
-        font-weight: 600;
-        color: var(--text);
-        &:hover {
-          background: var(--hover-transparent);
-          border-color: var(--hover-border);
-          color: var(--hover-text);
-        }
-      }
+    .restaurant-details {
+      font-size: 0.8rem;
+      color: var(--text-muted);
     }
   }
+}
 
-  .no-restaurants {
-    margin-top: 2rem;
-    font-family: var(--font);
-    font-size: 1.2rem;
-    color: var(--text-muted);
-    text-align: center;
-    grid-column: 1 / -1;
+.role {
+  display: inline-block;
+  padding: 4px 9px;
+  background: var(--bg-pills);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-on-pills);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.restaurant-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-end;
+  align-items: center;
+
+  .grid-menu-button {
+    flex: 1;
   }
+}
+
+.no-restaurants {
+  margin-top: 2rem;
+  font-family: var(--font);
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  text-align: center;
+  grid-column: 1 / -1;
+  padding-bottom: 2rem;
 }
