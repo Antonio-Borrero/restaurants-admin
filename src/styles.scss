@@ -86,3 +86,33 @@ body {
   color: var(--text);
   font-family: var(--font);
 }
+
+.btn {
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  font-family: var(--font);
+  font-size: 0.8rem;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--text-on-primary);
+  border: 1px solid var(--primary);
+  &:hover {
+    box-shadow: var(--hover-shadow);
+    background: var(--hover-primary);
+  }
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  &:hover {
+    background: var(--hover-transparent);
+    border-color: var(--hover-border);
+    color: var(--hover-text);
+  }
+}

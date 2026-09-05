@@ -19,24 +19,6 @@
       font-size: 1rem;
       color: var(--text-muted);
     }
-
-    button {
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text);
-      font-weight: 600;
-      font-family: var(--font);
-      font-size: 0.8rem;
-      cursor: pointer;
-
-      &:hover {
-        background: var(--hover-transparent);
-        border-color: var(--hover-border);
-        color: var(--hover-text);
-      }
-    }
   }
 }
 
