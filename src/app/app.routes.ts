@@ -3,6 +3,7 @@ import { Login } from './features/login/login';
 import { Restaurants } from './features/restaurants/restaurants';
 import { authGuard } from './core/auth-guard';
 import { Layout } from './shared/layout/layout';
+import { Register } from './features/register/register';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,10 @@ export const routes: Routes = [
         component: Restaurants,
       },
     ],
+  },
+  {
+    path: 'register',
+    component: Register,
   },
   {
     path: 'login',
