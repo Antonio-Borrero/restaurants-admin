@@ -11,6 +11,13 @@ export class Auth {
   private email = signal(localStorage.getItem('email'));
   userEmail = this.email.asReadonly();
 
+  register(email: string, password: string) {
+    return this.http.post<{ id: number; email: string }>(`${environment.apiUrl}/auth/register`, {
+      email,
+      password,
+    });
+  }
+
   login(email: string, password: string) {
     return this.http
       .post<{
