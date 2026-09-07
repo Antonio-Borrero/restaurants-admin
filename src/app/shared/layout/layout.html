@@ -1,6 +1,6 @@
 <main>
   <header class="layout-header">
-    <app-logo [width]="60" />
+    <app-logo [width]="logoWidth()" />
     <div class="email-logout">
       <span>{{ email() }}</span>
       <button (click)="logout()" class="btn btn-secondary">Cerrar sesión</button>
