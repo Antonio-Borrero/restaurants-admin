@@ -1,3 +1,5 @@
+@use '../../shared/breakpoints' as bp;
+
 :host {
   display: block;
 }
@@ -218,6 +220,29 @@
   font-family: var(--font);
   color: var(--text-muted);
   text-align: center;
-  grid-column: 1 / -1;
-  padding-bottom: 2rem;
+}
+
+@media (max-width: bp.$breakpoint-mobile) {
+  .restaurants-header {
+    flex-direction: column;
+    align-items: flex-start;
+    .restaurants-options {
+      margin-top: 2rem;
+      padding: 0;
+      .view-toggle {
+        display: none;
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
