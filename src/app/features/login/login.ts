@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Auth } from '../../core/auth';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Logo } from '../../shared/logo/logo';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -11,7 +11,7 @@ import { DangerIcon } from '../../shared/danger-icon/danger-icon';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, Logo, DangerIcon],
+  imports: [ReactiveFormsModule, Logo, DangerIcon, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
