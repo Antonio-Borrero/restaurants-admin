@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { RestaurantsService } from './restaurants-service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { InitialsPipe } from './initials-pipe';
+import { InitialsPipe } from '../../shared/initials-pipe/initials-pipe';
 import { UpperCasePipe } from '@angular/common';
 
 type ViewMode = 'grid' | 'list';
