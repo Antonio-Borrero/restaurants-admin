@@ -4,6 +4,7 @@ import { Restaurants } from './features/restaurants/restaurants';
 import { authGuard } from './core/auth-guard';
 import { Layout } from './shared/layout/layout';
 import { Register } from './features/register/register';
+import { Menu } from './features/menu/menu';
 
 export const routes: Routes = [
   {
@@ -14,6 +15,10 @@ export const routes: Routes = [
       {
         path: 'restaurants',
         component: Restaurants,
+      },
+      {
+        path: 'restaurants/:id',
+        component: Menu,
       },
     ],
   },
