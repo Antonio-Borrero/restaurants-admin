@@ -3,12 +3,13 @@ import { RestaurantsService } from './restaurants-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { InitialsPipe } from '../../shared/initials-pipe/initials-pipe';
 import { UpperCasePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 type ViewMode = 'grid' | 'list';
 
 @Component({
   selector: 'app-restaurants',
-  imports: [InitialsPipe, UpperCasePipe],
+  imports: [InitialsPipe, UpperCasePipe, RouterLink],
   templateUrl: './restaurants.html',
   styleUrl: './restaurants.scss',
 })

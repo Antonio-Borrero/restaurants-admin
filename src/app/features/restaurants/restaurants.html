@@ -55,7 +55,11 @@
                 </div>
               </div>
               <div class="restaurant-actions">
-                <button class="btn btn-primary grid-menu-button">Ver carta</button>
+                <a
+                  class="btn btn-primary grid-menu-button"
+                  [routerLink]="['/restaurants', restaurant.id]"
+                  >Ver carta</a
+                >
                 <button class="btn btn-secondary">Editar</button>
               </div>
             </div>
@@ -101,7 +105,11 @@
             </td>
             <td>
               <div class="restaurant-actions">
-                <button class="btn btn-primary">Ver carta</button>
+                <a
+                  class="btn btn-primary grid-menu-button"
+                  [routerLink]="['/restaurants', restaurant.id]"
+                  >Ver carta</a
+                >
                 <button class="btn btn-secondary">Editar</button>
               </div>
             </td>
