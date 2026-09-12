@@ -1,61 +1,22 @@
 <div>
-  <a routerLink="/restaurants">Volver</a>
+  <a routerLink="/restaurants" class="btn btn-secondary">← Ir a restaurantes</a>
   @if (menu(); as menu) {
-    <header>
+    <header class="menu-header">
       <h1>{{ menu.name }}</h1>
       <p>Gestión de carta</p>
-      <div>
-        <p>Cantidad de categorías</p>
-        <button>+ Nueva categoría</button>
-      </div>
     </header>
-    <ul>
-      @for (category of menu.categories; track category.id) {
-        <li>
-          <article>
-            <h2>{{ category.name }}</h2>
-            <div>
-              <button>+ plato</button>
-              <button>Editar</button>
-              <button>Eliminar</button>
-            </div>
-            <ul>
-              @for (dish of category.dishes; track dish.id) {
-                <li>
-                  <article>
-                    @if (dish.imageUrl) {
-                      <img
-                        [src]="dish.imageUrl"
-                        [alt]="`Foto de ${dish.name ?? 'plato sin nombrar'}`"
-                      />
-                    } @else {
-                      <div>
-                        {{ dish.name ?? '!' | Initials | uppercase }}
-                      </div>
-                    }
-                    <div>
-                      <h3>{{ dish.name ?? 'Plato sin nombrar' }}</h3>
-                      <p>{{ dish.description }}</p>
-                      <p>{{ dish.allergens }}</p>
-                    </div>
-                    <p>{{ dish.price }}</p>
-                    <div>
-                      <button>Editar</button>
-                      <button>Eliminar</button>
-                    </div>
-                  </article>
-                </li>
-              } @empty {
-                <p>No hay platos en esta categoría</p>
-              }
-            </ul>
-          </article>
-        </li>
-      } @empty {
-        <p>No hay categorías ni platos para este restaurante</p>
-      }
-    </ul>
-  } @else {
-    <p>Cargando...</p>
+    @if (isMobile()) {
+      <app-menu-mobile
+        [menu]="menu"
+        [categoryCount]="categoryCount()!"
+        [dishCount]="dishCount()!"
+      />
+    } @else {
+      <app-menu-desktop
+        [menu]="menu"
+        [categoryCount]="categoryCount()!"
+        [dishCount]="dishCount()!"
+      />
+    }
   }
 </div>
