@@ -1,0 +1,100 @@
+:host {
+  display: block;
+}
+
+.back-button {
+  background: var(--bg-secondary);
+  padding: 0.8rem 1rem;
+}
+
+.menu-dish {
+  margin-top: 3rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  overflow: hidden;
+
+  .image-placeholder {
+    background-color: var(--bg-dark);
+    padding: 2rem;
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      font-size: 3rem;
+      letter-spacing: 0.08rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+  }
+
+  .dish-information {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+    .dish-details {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      h1 {
+        font-size: 1.2rem;
+        letter-spacing: 0.05rem;
+      }
+
+      .dish-price {
+        color: var(--text-danger);
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+
+      .dish-description {
+        color: var(--text-muted);
+        font-weight: 400;
+      }
+    }
+
+    .dish-allergens {
+      padding-top: 1rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      h2 {
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .dish-actions {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+    padding: 0 1rem 1rem;
+
+    button {
+      flex-grow: 1;
+      padding: 1rem;
+    }
+  }
+}
+
+.no-dish,
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}

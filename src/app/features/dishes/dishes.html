@@ -1,0 +1,39 @@
+<div>
+  <button class="btn btn-secondary back-button" (click)="location.back()">← Entradas</button>
+  @if (dish(); as dish) {
+    <article class="menu-dish">
+      @if (dish.imageUrl) {
+        <img [src]="dish.imageUrl" [alt]="`Foto de ${dish.name ?? 'plato sin nombre'}`" />
+      } @else {
+        <div class="image-placeholder">
+          <p>{{ dish.name ?? 'plato sin nombre' | Initials | uppercase }}</p>
+        </div>
+      }
+      <div class="dish-information">
+        <div class="dish-details">
+          <h1>
+            {{ dish.name ?? 'Plato sin nombre' }}
+          </h1>
+          <p class="dish-price">{{ dish.price | currency: 'EUR' }}</p>
+          <p class="dish-description">{{ dish.description ?? 'Plato sin descripción' }}</p>
+        </div>
+        <div class="dish-allergens">
+          <h2>Alérgenos:</h2>
+          <p>{{ dish.allergens }}</p>
+        </div>
+      </div>
+      <div class="dish-actions">
+        <button class="btn btn-secondary">Editar plato</button>
+        <button class="btn btn-secondary delete-button">Eliminar</button>
+      </div>
+    </article>
+  } @else if (dish() === null) {
+    <div class="no-dish">
+      <p>Plato no encontrado</p>
+    </div>
+  } @else {
+    <div class="loading">
+      <p>Cargando...</p>
+    </div>
+  }
+</div>
