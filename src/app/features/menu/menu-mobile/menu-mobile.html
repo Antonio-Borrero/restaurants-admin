@@ -1,1 +1,81 @@
-<p>menu-mobile works!</p>,
+<div class="menu-mobile-header">
+  <p>
+    {{ categoryCount() | Pluralize: 'categoría' : 'categorías' }} ·
+    {{ dishCount() | Pluralize: 'plato' : 'platos' }}
+  </p>
+  <button class="btn btn-primary">+ Nueva categoría</button>
+</div>
+@if (categoryCount() > 0) {
+  <ul class="category-list">
+    @for (category of menu().categories; track category.id) {
+      @let isSelected = category.id === selectedCategory()?.id;
+      <li class="category-list-item">
+        <article>
+          <button
+            class="category-name"
+            (click)="selectedCategoryId.set(category.id)"
+            [class.selected]="isSelected"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 1024 1024"
+              [class.selected]="isSelected"
+            >
+              <path d="M0 0h1024v1024H0z" fill="none" />
+              <path
+                fill="currentColor"
+                d="M340.9 149.3a30.6 30.6 0 0 0 0 42.8L652.7 512L341 831.9a30.6 30.6 0 0 0 0 42.7a29 29 0 0 0 41.7 0l331.6-340.3a32 32 0 0 0 0-44.6L382.6 149.4a29 29 0 0 0-41.7 0z"
+              />
+            </svg>
+            <div>
+              <h2>{{ category.name }}</h2>
+              <p>{{ category.dishes.length | Pluralize: 'plato' : 'platos' }}</p>
+            </div>
+          </button>
+          @if (isSelected && category.dishes.length > 0) {
+            <ul class="dish-list">
+              @for (dish of category.dishes; track dish.id) {
+                <li>
+                  <a [routerLink]="['/dishes', dish.id]" class="dish-list-item">
+                    <p>{{ dish.name ?? 'Plato sin nombre' }}</p>
+                    <div class="dish-list-item-price">
+                      <p>{{ dish.price | currency: 'EUR' }}</p>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 1024 1024"
+                      >
+                        <path d="M0 0h1024v1024H0z" fill="none" />
+                        <path
+                          fill="currentColor"
+                          d="M340.9 149.3a30.6 30.6 0 0 0 0 42.8L652.7 512L341 831.9a30.6 30.6 0 0 0 0 42.7a29 29 0 0 0 41.7 0l331.6-340.3a32 32 0 0 0 0-44.6L382.6 149.4a29 29 0 0 0-41.7 0z"
+                        />
+                      </svg>
+                    </div>
+                  </a>
+                </li>
+              }
+            </ul>
+            <div class="dish-list-actions">
+              <button class="btn btn-secondary">+ Plato</button>
+              <button class="btn btn-secondary">Editar</button>
+              <button class="btn btn-secondary delete-button">Eliminar</button>
+            </div>
+          }
+        </article>
+      </li>
+    }
+  </ul>
+} @else {
+  <div class="empty-menu">
+    <img src="dishboard-icon.svg" alt="Dishboard-logo" />
+    <h2>La carta está vacía</h2>
+    <p>
+      Empieza creando una categoría, por ejemplo <span>Entradas</span>, y luego agrega los platos
+      que van dentro.
+    </p>
+  </div>
+}
