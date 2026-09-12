@@ -59,7 +59,7 @@
         <div class="category-actions">
           <button class="btn btn-secondary">+ Plato</button>
           <button class="btn btn-secondary">Editar</button>
-          <button class="btn btn-secondary delete-category-button">Eliminar</button>
+          <button class="btn btn-secondary delete-button">Eliminar</button>
         </div>
       </div>
       <ul class="dish-list">
@@ -84,10 +84,10 @@
                 </div>
               </div>
               <span>{{ dish.price | currency: 'EUR' }}</span>
-            </div>
+            </article>
             <div class="dish-actions">
               <button class="btn btn-secondary">Editar</button>
-              <button class="btn btn-secondary delete-dish-button">Eliminar</button>
+              <button class="btn btn-secondary delete-button">Eliminar</button>
             </div>
           </li>
         } @empty {

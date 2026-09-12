@@ -118,3 +118,8 @@ body {
     color: var(--hover-text);
   }
 }
+
+.delete-button {
+  color: var(--text-danger);
+  border-color: var(--border-danger);
+}
