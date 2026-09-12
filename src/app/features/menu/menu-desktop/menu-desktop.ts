@@ -3,11 +3,10 @@ import { Category, RestaurantMenu } from '../menu-interface';
 import { PluralizePipe } from '../../../shared/pluralize-pipe/pluralize-pipe';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { InitialsPipe } from '../../../shared/initials-pipe/initials-pipe';
-import { Logo } from '../../../shared/logo/logo';
 
 @Component({
   selector: 'app-menu-desktop',
-  imports: [PluralizePipe, CurrencyPipe, InitialsPipe, UpperCasePipe, Logo],
+  imports: [PluralizePipe, CurrencyPipe, InitialsPipe, UpperCasePipe],
   templateUrl: './menu-desktop.html',
   styleUrl: './menu-desktop.scss',
 })
