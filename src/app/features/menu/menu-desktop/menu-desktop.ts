@@ -1,5 +1,5 @@
 import { Component, computed, input, signal } from '@angular/core';
-import { Category, RestaurantMenu } from '../menu-interface';
+import { Category, RestaurantMenu } from '../../../shared/menu-interface/menu-interface';
 import { PluralizePipe } from '../../../shared/pluralize-pipe/pluralize-pipe';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { InitialsPipe } from '../../../shared/initials-pipe/initials-pipe';
