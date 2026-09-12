@@ -14,6 +14,7 @@ import { map } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Logo } from '../../shared/logo/logo';
 import { DangerIcon } from '../../shared/danger-icon/danger-icon';
+import { breakpointMobile } from '../../shared/breakpoints/breakpoints';
 
 function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
   const password = control.get('password')?.value;
@@ -46,7 +47,7 @@ export class Register {
 
   protected logoWidth = toSignal(
     this.breakpointObserver
-      .observe('(max-width: 768px)')
+      .observe(`(max-width: ${breakpointMobile}px)`)
       .pipe(map((result) => (result.matches ? 60 : 80))),
     { initialValue: 80 },
   );

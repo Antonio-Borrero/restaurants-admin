@@ -8,6 +8,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { DangerIcon } from '../../shared/danger-icon/danger-icon';
+import { breakpointMobile } from '../../shared/breakpoints/breakpoints';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class Login {
 
   protected logoWidth = toSignal(
     this.breakpointObserver
-      .observe('(max-width: 768px)')
+      .observe(`(max-width: ${breakpointMobile}px)`)
       .pipe(map((result) => (result.matches ? 60 : 80))),
     { initialValue: 80 },
   );

@@ -5,6 +5,7 @@ import { Auth } from '../../core/auth';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs';
+import { breakpointMobile } from '../breakpoints/breakpoints';
 
 @Component({
   selector: 'app-layout',
@@ -20,7 +21,7 @@ export class Layout {
 
   protected logoWidth = toSignal(
     this.breakpointObserver
-      .observe('(max-width: 768px)')
+      .observe(`(max-width: ${breakpointMobile}px)`)
       .pipe(map((result) => (result.matches ? 45 : 80))),
     { initialValue: 80 },
   );
