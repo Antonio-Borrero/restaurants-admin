@@ -27,7 +27,9 @@
           </svg>
         </button>
       </div>
-      <button class="btn btn-primary new-restaurant">+ Nuevo restaurante</button>
+      <button class="btn btn-primary new-restaurant" (click)="modal.set(true)">
+        + Nuevo restaurante
+      </button>
     </div>
   </header>
   @if (viewMode() === 'grid') {
@@ -125,3 +127,9 @@
     </table>
   }
 </div>
+
+<app-restaurant-form
+  [isOpen]="modal()"
+  (close)="modal.set(false)"
+  (created)="updateRestaurantsList($event)"
+/>

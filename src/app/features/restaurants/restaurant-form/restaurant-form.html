@@ -1,0 +1,145 @@
+<app-modal [isOpen]="isOpen()" (close)="closeModal()">
+  <form class="restaurant-form" [formGroup]="form" (ngSubmit)="submitForm()">
+    @if (error()) {
+      <p class="error"><app-danger-icon [width]="20" />{{ error() }}</p>
+    }
+    @if (form.controls.name.touched && form.controls.name.invalid) {
+      <p class="error"><app-danger-icon [width]="20" />El nombre es obligatorio</p>
+    }
+    @if (form.controls.email.touched && form.controls.email.invalid) {
+      <p class="error"><app-danger-icon [width]="25" />El email debe tener un formato valido</p>
+    }
+    <h3>Nuevo restaurante</h3>
+    <div class="form-body">
+      <div class="form-restaurant-identity">
+        <div class="form-name">
+          <label for="name">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            formControlName="name"
+            placeholder="Ej: La Terraza"
+          />
+        </div>
+
+        <div class="form-cuisine-type">
+          <label for="cuisineType">Tipo de cocina</label>
+          <input
+            type="text"
+            id="cuisineType"
+            name="cuisineType"
+            formControlName="cuisineType"
+            placeholder="Ej: Parrilla"
+          />
+        </div>
+
+        <div class="form-description">
+          <label for="description">Descripción</label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            formControlName="description"
+            placeholder="Ej: Asador especializado en carne de vaca tudanca"
+          />
+        </div>
+      </div>
+
+      <div class="form-contact">
+        <p>Datos de contacto</p>
+        <div class="form-address">
+          <label for="address">Dirección</label>
+          <input
+            type="text"
+            name="address"
+            formControlName="address"
+            id="address"
+            placeholder="Ej: Gran Vía, 28, Madrid"
+          />
+        </div>
+        <div class="form-contact-data">
+          <div class="form-telephone">
+            <label for="telephone">Teléfono</label>
+            <input
+              type="tel"
+              name="telephone"
+              formControlName="telephone"
+              id="telephone"
+              placeholder="Ej: +54 643363407"
+            />
+          </div>
+          <div class="form-email">
+            <label for="email">Correo electrónico</label>
+            <input
+              type="email"
+              name="email"
+              formControlName="email"
+              id="email"
+              placeholder="Ej: contacto@restaurante.com"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-image">
+        <label for="imageUrl">Foto</label>
+        <input
+          type="file"
+          name="imageUrl"
+          id="imageUrl"
+          accept="image/*"
+          #imageInput
+          (change)="selectImage()"
+        />
+        <div class="image-picker">
+          <div class="image-thumb">
+            @if (imagePreview()) {
+              <img [src]="imagePreview()" alt="" />
+            } @else {
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="3"
+                  y="5"
+                  width="18"
+                  height="14"
+                  rx="2.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                ></rect>
+                <circle cx="8.5" cy="10" r="1.6" fill="currentColor"></circle>
+                <path
+                  d="M4 17l5-4.5 4 3.5 3-2.5 4 3.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            }
+          </div>
+          <div class="image-meta">
+            @if (image()) {
+              <div class="image-name">{{ image()?.name }}</div>
+            } @else {
+              <div class="image-name">Ninguna imagen seleccionada</div>
+              <div class="image-hint">JPG o PNG, hasta 5 MB</div>
+            }
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="imageFile()?.nativeElement!.click()"
+          >
+            Elegir imagen
+          </button>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" (click)="closeModal()" class="btn btn-secondary">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+          Crear restaurante
+        </button>
+      </div>
+    </div>
+  </form>
+</app-modal>

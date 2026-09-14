@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Restaurant } from './restaurant-interface';
+import { NewRestaurant, Restaurant } from './restaurant-interface';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -11,5 +11,9 @@ export class RestaurantsService {
 
   getRestaurants() {
     return this.http.get<Restaurant[]>(`${environment.apiUrl}/restaurants`);
+  }
+
+  createRestaurant(data: NewRestaurant) {
+    return this.http.post<Restaurant>(`${environment.apiUrl}/restaurants`, data);
   }
 }
