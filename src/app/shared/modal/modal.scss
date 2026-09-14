@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+dialog {
+  margin: auto;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+}
+dialog::backdrop {
+  background: #000000;
+  opacity: 0.3;
+  backdrop-filter: blur(4px);
+}
