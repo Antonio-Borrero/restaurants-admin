@@ -10,13 +10,17 @@
         [menu]="menu"
         [categoryCount]="categoryCount()!"
         [dishCount]="dishCount()!"
+        (openModal)="modal.set(true)"
       />
     } @else {
       <app-menu-desktop
         [menu]="menu"
         [categoryCount]="categoryCount()!"
         [dishCount]="dishCount()!"
+        (openModal)="modal.set(true)"
       />
     }
   }
 </div>
+
+<app-category-form [isOpen]="modal()" (close)="modal.set(false)" (created)="getRestaurantMenu()" />

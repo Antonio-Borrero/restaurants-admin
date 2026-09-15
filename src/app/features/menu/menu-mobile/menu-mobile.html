@@ -3,7 +3,7 @@
     {{ categoryCount() | Pluralize: 'categoría' : 'categorías' }} ·
     {{ dishCount() | Pluralize: 'plato' : 'platos' }}
   </p>
-  <button class="btn btn-primary">+ Nueva categoría</button>
+  <button class="btn btn-primary" (click)="openModal.emit()">+ Nueva categoría</button>
 </div>
 @if (categoryCount() > 0) {
   <ul class="category-list">

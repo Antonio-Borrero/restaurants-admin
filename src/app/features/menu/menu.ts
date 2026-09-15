@@ -27,6 +27,7 @@ export class Menu {
   );
   protected menu = signal<RestaurantMenu | null>(null);
   private restaurantId = '';
+  protected modal = signal<boolean>(false);
 
   constructor() {
     this.route.paramMap.subscribe({

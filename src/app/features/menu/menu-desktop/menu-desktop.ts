@@ -1,4 +1,4 @@
-import { Component, computed, input, signal } from '@angular/core';
+import { Component, computed, input, output, signal } from '@angular/core';
 import { Category, RestaurantMenu } from '../../../shared/menu-interface/menu-interface';
 import { PluralizePipe } from '../../../shared/pluralize-pipe/pluralize-pipe';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
@@ -21,4 +21,5 @@ export class MenuDesktop {
     }
     return this.menu().categories[0];
   });
+  public openModal = output<void>();
 }
