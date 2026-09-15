@@ -1,0 +1,19 @@
+<app-modal [isOpen]="isOpen()" (close)="closeModal()">
+  <form class="category-form" [formGroup]="form" (ngSubmit)="submitForm()">
+    @if (error()) {
+      <p class="error"><app-danger-icon [width]="20" />{{ error() }}</p>
+    }
+    <h3>Nueva categoría</h3>
+
+    <div class="form-name">
+      <label for="name">Nombre de categoría</label>
+      <input type="text" id="name" name="name" formControlName="name" placeholder="Ej: Entradas" />
+    </div>
+    <div class="form-actions">
+      <button type="button" (click)="closeModal()" class="btn btn-secondary">Cancelar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        Crear categoría
+      </button>
+    </div>
+  </form>
+</app-modal>
