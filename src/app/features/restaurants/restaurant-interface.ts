@@ -7,8 +7,6 @@ export interface Restaurant {
   cuisineType?: string | null;
   description?: string | null;
   imageUrl?: string | null;
-  createdAt: string;
-  updatedAt: string;
   categoryCount: number;
   role: string;
   permissions: string[];
@@ -17,5 +15,5 @@ export interface Restaurant {
 
 export type NewRestaurant = Omit<
   Restaurant,
-  'id' | 'createdAt' | 'updatedAt' | 'categoryCount' | 'role' | 'permissions' | 'dishCount'
+  'id' | 'categoryCount' | 'role' | 'permissions' | 'dishCount'
 >;

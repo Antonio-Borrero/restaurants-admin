@@ -25,7 +25,7 @@ import { Modal } from '../../../shared/modal/modal';
 })
 export class RestaurantForm {
   public isOpen = input<boolean>(false);
-  public close = output();
+  public close = output<void>();
   public created = output<Restaurant>();
 
   private fb = inject(FormBuilder);
@@ -33,7 +33,7 @@ export class RestaurantForm {
   protected image = signal<File | null>(null);
   private cloudinaryService = inject(CloudinaryService);
   private restaurantsService = inject(RestaurantsService);
-  protected error = signal('');
+  protected error = signal<string>('');
 
   protected form = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
