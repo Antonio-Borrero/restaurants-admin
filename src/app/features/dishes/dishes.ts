@@ -5,6 +5,7 @@ import { catchError, of, switchMap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { InitialsPipe } from '../../shared/initials-pipe/initials-pipe';
 import { CurrencyPipe, Location, UpperCasePipe } from '@angular/common';
+import { DEFAULT_LOCALE } from '../../core/default-locale';
 
 @Component({
   selector: 'app-dishes',
@@ -21,7 +22,7 @@ export class Dish {
     this.route.paramMap.pipe(
       switchMap((param) => {
         const id = param.get('id')!;
-        return this.dishService.getDish(id, 'es').pipe(catchError(() => of(null)));
+        return this.dishService.getDish(id, DEFAULT_LOCALE).pipe(catchError(() => of(null)));
       }),
     ),
   );
