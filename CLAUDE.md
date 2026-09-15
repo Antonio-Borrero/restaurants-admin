@@ -7,8 +7,8 @@ Admin panel (Angular) that consumes restaurants-api's protected routes. Agreed m
 ## Language
 
 - Code, comments, and project documentation (including this file) → English
-- Commits: Conventional Commits with scope, in English. Format: `type(scope): message` — e.g. `feat(login): add auth guard`, `fix(dishes): correct validation on create form`
-- Scope = the feature folder the change touches: `login`, `restaurants`, `categories`, `dishes`. Use `core` or `shared` when the change isn't feature-specific, or `app` for the root app shell (`src/app/app.*`)
+- Commits: Conventional Commits with scope, in English. Format: `type(scope): message` — e.g. `feat(login): add auth guard`, `fix(menu): correct validation on create form`
+- Scope = the feature folder the change touches: `login`, `restaurants`, `menu`, `dishes`. Use `core` or `shared` when the change isn't feature-specific, or `app` for the root app shell (`src/app/app.*`)
 - Scope is optional: omit it for repo-level files not tied to any folder (this file, README, CI config) — e.g. `docs: add CLAUDE.md with project conventions`
 - UI text → Spanish for now. Multi-language support (i18n) is planned for later, not a priority yet
 
