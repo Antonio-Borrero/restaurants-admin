@@ -16,6 +16,7 @@ import { removeEmptyFields } from '../../../shared/remove-empty-fields/remove-em
 import { HttpErrorResponse } from '@angular/common/http';
 import { DangerIcon } from '../../../shared/danger-icon/danger-icon';
 import { Modal } from '../../../shared/modal/modal';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-restaurant-form',
@@ -61,29 +62,31 @@ export class RestaurantForm {
 
   protected submitForm() {
     if (this.image()) {
-      this.cloudinaryService.uploadImage(this.image()!).subscribe({
-        next: (resp) => {
-          this.restaurantsService
-            .createRestaurant(
-              removeEmptyFields({
-                ...this.form.getRawValue(),
-                imageUrl: resp.secure_url,
-              }) as NewRestaurant,
-            )
-            .subscribe({
-              next: (resp) => {
-                this.closeModal();
-                this.created.emit(resp);
-              },
-              error: (err: HttpErrorResponse) => {
-                this.error.set(
-                  err.error?.error?.message ??
-                    'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
-                );
-              },
-            });
-        },
-      });
+      this.cloudinaryService
+        .uploadImage(this.image()!, environment.cloudinaryRestaurantPreset)
+        .subscribe({
+          next: (resp) => {
+            this.restaurantsService
+              .createRestaurant(
+                removeEmptyFields({
+                  ...this.form.getRawValue(),
+                  imageUrl: resp.secure_url,
+                }) as NewRestaurant,
+              )
+              .subscribe({
+                next: (resp) => {
+                  this.closeModal();
+                  this.created.emit(resp);
+                },
+                error: (err: HttpErrorResponse) => {
+                  this.error.set(
+                    err.error?.error?.message ??
+                      'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
+                  );
+                },
+              });
+          },
+        });
     } else {
       this.restaurantsService
         .createRestaurant(removeEmptyFields({ ...this.form.getRawValue() }) as NewRestaurant)

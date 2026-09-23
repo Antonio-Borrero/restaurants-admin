@@ -12,10 +12,10 @@ interface CloudinaryResponse {
 export class CloudinaryService {
   private http = inject(HttpClient);
 
-  uploadImage(file: File) {
+  uploadImage(file: File, preset: string) {
     const image = new FormData();
     image.append('file', file);
-    image.append('upload_preset', environment.cloudinaryPreset);
+    image.append('upload_preset', preset);
 
     return this.http.post<CloudinaryResponse>(
       `https://api.cloudinary.com/v1_1/${environment.cloudinaryName}/image/upload`,
