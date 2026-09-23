@@ -19,3 +19,11 @@ export interface Dish {
   allergens: string[];
   imageUrl: string | null;
 }
+
+export interface NewDish {
+  price: number;
+  allergens: string[];
+  originalName?: string;
+  translations: { locale: string; name: string; description?: string }[];
+  imageUrl?: string;
+}
