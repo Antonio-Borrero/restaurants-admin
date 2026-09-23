@@ -1,0 +1,136 @@
+<app-modal [isOpen]="isOpen()" (close)="closeModal()">
+  <form class="dish-form" [formGroup]="form" (ngSubmit)="submitForm()">
+    @if (error()) {
+      <p class="error"><app-danger-icon [width]="20" />{{ error() }}</p>
+    }
+    @if (form.controls.name.touched && form.controls.name.invalid) {
+      <p class="error"><app-danger-icon [width]="20" />El nombre es obligatorio</p>
+    }
+    @if (form.controls.price.touched && form.controls.price.invalid) {
+      <p class="error"><app-danger-icon [width]="20" />El precio del plato es obligatorio</p>
+    }
+    <h3>Nuevo plato</h3>
+    <div class="form-body">
+      <div class="dish-identity">
+        <div class="dish-name">
+          <label for="name">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            formControlName="name"
+            placeholder="Ej: Moussaka"
+          />
+        </div>
+
+        <div class="dish-price">
+          <label for="price">Precio</label>
+          <input
+            type="text"
+            name="price"
+            formControlName="price"
+            id="price"
+            placeholder="{{ currency }} 17"
+          />
+        </div>
+      </div>
+
+      <div class="dish-original-name">
+        <label for="originalName">Nombre original <span>(opcional)</span></label>
+        <input
+          type="text"
+          id="originalName"
+          name="originalName"
+          formControlName="originalName"
+          placeholder="Ej: μουσακάς"
+        />
+      </div>
+
+      <div class="dish-description">
+        <label for="description">Descripción</label>
+        <textarea
+          id="description"
+          name="description"
+          formControlName="description"
+          placeholder="Breve descripción del plato"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="dish-allergens">
+        <h4>Alérgenos</h4>
+        <div class="allergens-grid">
+          @for (allergen of allergens; track $index) {
+            <label class="allergen">
+              <input
+                type="checkbox"
+                (change)="toggleAllergen(allergen)"
+                [checked]="allergensState()[allergen]"
+              />
+              <span>{{ allergen }}</span>
+            </label>
+          }
+        </div>
+      </div>
+
+      <div class="form-image">
+        <label for="imageUrl">Foto</label>
+        <input
+          type="file"
+          name="imageUrl"
+          id="imageUrl"
+          accept="image/*"
+          #imageInput
+          (change)="selectImage()"
+        />
+        <div class="image-picker">
+          <div class="image-thumb">
+            @if (imagePreview()) {
+              <img [src]="imagePreview()" alt="" />
+            } @else {
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <rect
+                  x="3"
+                  y="5"
+                  width="18"
+                  height="14"
+                  rx="2.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                ></rect>
+                <circle cx="8.5" cy="10" r="1.6" fill="currentColor"></circle>
+                <path
+                  d="M4 17l5-4.5 4 3.5 3-2.5 4 3.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            }
+          </div>
+          <div class="image-meta">
+            @if (image()) {
+              <div class="image-name">{{ image()?.name }}</div>
+            } @else {
+              <div class="image-name">Ninguna imagen seleccionada</div>
+              <div class="image-hint">JPG o PNG, hasta 5 MB</div>
+            }
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="imageFile()?.nativeElement!.click()"
+          >
+            Elegir imagen
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" (click)="closeModal()" class="btn btn-secondary">Cancelar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Crear plato</button>
+    </div>
+  </form>
+</app-modal>
