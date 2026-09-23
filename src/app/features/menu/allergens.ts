@@ -1,0 +1,16 @@
+export const ALLERGENS = [
+  'Gluten',
+  'Crustaceans',
+  'Eggs',
+  'Fish',
+  'Peanuts',
+  'Soy',
+  'Milk',
+  'Nuts',
+  'Celery',
+  'Mustard',
+  'Sesame',
+  'Sulphites',
+  'Lupin',
+  'Molluscs',
+];
