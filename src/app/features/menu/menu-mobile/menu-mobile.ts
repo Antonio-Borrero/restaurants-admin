@@ -21,5 +21,6 @@ export class MenuMobile {
     }
     return this.menu().categories[0];
   });
-  public openModal = output<void>();
+  public openCategoryModal = output<void>();
+  public openDishModal = output<number>();
 }

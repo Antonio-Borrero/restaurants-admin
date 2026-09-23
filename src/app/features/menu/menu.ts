@@ -10,10 +10,11 @@ import { MenuMobile } from './menu-mobile/menu-mobile';
 import { RestaurantMenu } from '../../shared/menu-interface/menu-interface';
 import { DEFAULT_LOCALE } from '../../core/default-locale';
 import { CategoryForm } from './category-form/category-form';
+import { DishForm } from './dish-form/dish-form';
 
 @Component({
   selector: 'app-menu',
-  imports: [RouterLink, MenuDesktop, MenuMobile, CategoryForm],
+  imports: [RouterLink, MenuDesktop, MenuMobile, CategoryForm, DishForm],
   templateUrl: './menu.html',
   styleUrl: './menu.scss',
 })
@@ -27,7 +28,9 @@ export class Menu {
   );
   protected menu = signal<RestaurantMenu | null>(null);
   private restaurantId = '';
-  protected modal = signal<boolean>(false);
+  protected modal = signal<
+    { type: 'createCategory' } | { type: 'createDish'; categoryId: number } | null
+  >(null);
 
   constructor() {
     this.route.paramMap.subscribe({

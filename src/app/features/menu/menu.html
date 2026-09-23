@@ -10,17 +10,31 @@
         [menu]="menu"
         [categoryCount]="categoryCount()!"
         [dishCount]="dishCount()!"
-        (openModal)="modal.set(true)"
+        (openCategoryModal)="modal.set({ type: 'createCategory' })"
+        (openDishModal)="modal.set({ type: 'createDish', categoryId: $event })"
       />
     } @else {
       <app-menu-desktop
         [menu]="menu"
         [categoryCount]="categoryCount()!"
         [dishCount]="dishCount()!"
-        (openModal)="modal.set(true)"
+        (openCategoryModal)="modal.set({ type: 'createCategory' })"
+        (openDishModal)="modal.set({ type: 'createDish', categoryId: $event })"
       />
     }
   }
 </div>
 
-<app-category-form [isOpen]="modal()" (close)="modal.set(false)" (created)="getRestaurantMenu()" />
+@if (modal(); as activeModal) {
+  @if (activeModal.type === 'createCategory') {
+    <app-category-form [isOpen]="true" (close)="modal.set(null)" (created)="getRestaurantMenu()" />
+  }
+  @if (activeModal.type === 'createDish') {
+    <app-dish-form
+      [isOpen]="true"
+      (close)="modal.set(null)"
+      (created)="getRestaurantMenu()"
+      [categoryId]="activeModal.categoryId"
+    />
+  }
+}
