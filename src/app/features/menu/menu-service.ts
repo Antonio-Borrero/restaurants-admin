@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Category, RestaurantMenu } from '../../shared/menu-interface/menu-interface';
+import { NewDish, RestaurantMenu } from '../../shared/menu-interface/menu-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -19,5 +19,9 @@ export class MenuService {
     return this.http.post(`${environment.apiUrl}/restaurants/${restaurantId}/categories`, {
       translations: [{ name, locale }],
     });
+  }
+
+  createDish(categoryId: number, data: NewDish) {
+    return this.http.post(`${environment.apiUrl}/categories/${categoryId}/dishes`, data);
   }
 }
