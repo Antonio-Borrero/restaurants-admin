@@ -1,3 +1,5 @@
 <dialog #modalDialog (close)="close.emit()" (click)="clickOutside($event)">
-  <ng-content></ng-content>
+  <div class="content-wrapper">
+    <ng-content></ng-content>
+  </div>
 </dialog>

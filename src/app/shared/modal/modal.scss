@@ -1,15 +1,53 @@
+@use '../breakpoints/breakpoints' as bp;
+
 :host {
   display: block;
 }
 
 dialog {
   margin: auto;
-  border: none;
   border-radius: 15px;
-  overflow: hidden;
+  border: 1px solid var(--border);
+
+  .content-wrapper {
+    max-height: 90vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    margin-block: 0.5rem;
+
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 10px;
+    }
+  }
 }
+
 dialog::backdrop {
   background: #000000;
   opacity: 0.3;
   backdrop-filter: blur(4px);
+}
+
+@media (max-width: bp.$breakpoint-mobile) {
+  dialog {
+    scrollbar-width: none;
+
+    .content-wrapper {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
 }

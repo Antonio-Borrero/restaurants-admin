@@ -128,3 +128,7 @@ body {
   color: var(--text-danger);
   border-color: var(--border-danger);
 }
+
+body:has(dialog[open]) {
+  overflow: hidden;
+}
