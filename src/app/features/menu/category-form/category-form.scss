@@ -1,14 +1,11 @@
-:host {
-  display: block;
-}
+@use '../../../shared/breakpoints/breakpoints' as bp;
 
 :host {
   display: block;
 }
 
 .category-form {
-  padding: 2rem;
-  border: 1px solid var(--border);
+  padding: 1rem 2rem;
   width: 32rem;
 
   .error {
@@ -65,6 +62,18 @@
       flex-grow: 1;
       padding: 0.8rem 1rem;
       font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: bp.$breakpoint-mobile) {
+  .category-form {
+    width: 90dvw;
+
+    .form-actions {
+      button {
+        font-size: 0.9rem;
+      }
     }
   }
 }
