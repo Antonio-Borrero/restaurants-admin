@@ -1,3 +1,5 @@
+@use '../../../shared/breakpoints/breakpoints' as bp;
+
 :host {
   display: block;
   min-height: 0;
@@ -5,12 +7,8 @@
 
 .dish-form {
   padding: 2rem;
-  border: 1px solid var(--border);
   max-width: 36rem;
   border-radius: 10px;
-  display: flex;
-  max-height: calc(100vh - 6rem);
-  flex-direction: column;
 
   .error {
     display: flex;
@@ -261,6 +259,26 @@
       flex-grow: 1;
       padding: 0.8rem 1rem;
       font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: bp.$breakpoint-mobile) {
+  .dish-form {
+    .form-body {
+      .dish-identity {
+        flex-direction: column;
+      }
+
+      .form-image {
+        .image-picker {
+          flex-direction: column;
+
+          .image-meta {
+            text-align: center;
+          }
+        }
+      }
     }
   }
 }
