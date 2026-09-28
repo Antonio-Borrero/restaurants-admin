@@ -27,7 +27,10 @@
           </svg>
         </button>
       </div>
-      <button class="btn btn-primary new-restaurant" (click)="modal.set(true)">
+      <button
+        class="btn btn-primary new-restaurant"
+        (click)="modal.set({ type: 'createRestaurant' })"
+      >
         + Nuevo restaurante
       </button>
     </div>
@@ -62,7 +65,12 @@
                   [routerLink]="['/restaurants', restaurant.id]"
                   >Ver carta</a
                 >
-                <button class="btn btn-secondary">Editar</button>
+                <button
+                  class="btn btn-secondary"
+                  (click)="modal.set({ type: 'editRestaurant', restaurant })"
+                >
+                  Editar
+                </button>
               </div>
             </div>
           </article>
@@ -128,8 +136,20 @@
   }
 </div>
 
-<app-restaurant-form
-  [isOpen]="modal()"
-  (close)="modal.set(false)"
-  (created)="updateRestaurantsList($event)"
-/>
+@if (modal(); as activeModal) {
+  @if (activeModal.type === 'createRestaurant') {
+    <app-restaurant-form
+      [isOpen]="true"
+      (close)="modal.set(null)"
+      (created)="updateRestaurantsList($event)"
+    />
+  }
+  @if (activeModal.type === 'editRestaurant') {
+    <app-restaurant-form
+      [isOpen]="true"
+      [editRestaurant]="activeModal.restaurant"
+      (close)="modal.set(null)"
+      (created)="updateRestaurantsList($event)"
+    />
+  }
+}

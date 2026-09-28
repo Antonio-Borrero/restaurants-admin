@@ -17,7 +17,9 @@ type ViewMode = 'grid' | 'list';
 export class Restaurants {
   private restaurantsService = inject(RestaurantsService);
   protected viewMode = signal<ViewMode>('grid');
-  protected modal = signal(false);
+  protected modal = signal<
+    { type: 'createRestaurant' } | { type: 'editRestaurant'; restaurant: Restaurant } | null
+  >(null);
 
   protected restaurantsList = signal<Restaurant[]>([]);
 
@@ -38,6 +40,11 @@ export class Restaurants {
   }
 
   protected updateRestaurantsList(restaurant: Restaurant) {
-    this.restaurantsList.update((value) => [...value, restaurant]);
+    this.restaurantsList.update((value) => {
+      if (value.some((curr) => curr.id === restaurant.id)) {
+        return value.map((curr) => (curr.id === restaurant.id ? restaurant : curr));
+      }
+      return [...value, restaurant];
+    });
   }
 }
