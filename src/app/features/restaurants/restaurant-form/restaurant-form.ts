@@ -1,6 +1,7 @@
 import {
   Component,
   computed,
+  effect,
   ElementRef,
   inject,
   input,
@@ -17,6 +18,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DangerIcon } from '../../../shared/danger-icon/danger-icon';
 import { Modal } from '../../../shared/modal/modal';
 import { environment } from '../../../../environments/environment';
+import { map, Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-restaurant-form',
@@ -28,6 +30,25 @@ export class RestaurantForm {
   public isOpen = input<boolean>(false);
   public close = output<void>();
   public created = output<Restaurant>();
+  public editRestaurant = input<Restaurant | null>(null);
+
+  constructor() {
+    effect(() => {
+      const restaurant = this.editRestaurant();
+      if (restaurant) {
+        this.form.patchValue({
+          name: restaurant.name,
+          cuisineType: restaurant.cuisineType ?? '',
+          address: restaurant.address ?? '',
+          telephone: restaurant.telephone ?? '',
+          email: restaurant.email ?? '',
+          description: restaurant.description ?? '',
+        });
+      } else {
+        this.form.reset();
+      }
+    });
+  }
 
   private fb = inject(FormBuilder);
   protected imageFile = viewChild<ElementRef<HTMLInputElement>>('imageInput');
@@ -50,6 +71,9 @@ export class RestaurantForm {
   }
 
   protected imagePreview = computed(() => {
+    if (this.editRestaurant() && !this.image()) {
+      return this.editRestaurant()?.imageUrl;
+    }
     const file = this.image();
     return file ? URL.createObjectURL(file) : null;
   });
@@ -61,47 +85,39 @@ export class RestaurantForm {
   }
 
   protected submitForm() {
-    if (this.image()) {
-      this.cloudinaryService
-        .uploadImage(this.image()!, environment.cloudinaryRestaurantPreset)
-        .subscribe({
-          next: (resp) => {
-            this.restaurantsService
-              .createRestaurant(
-                removeEmptyFields({
-                  ...this.form.getRawValue(),
-                  imageUrl: resp.secure_url,
-                }) as NewRestaurant,
+    const image = this.image();
+    const restaurant = this.editRestaurant();
+
+    const imageUrl$: Observable<string | undefined> = image
+      ? this.cloudinaryService
+          .uploadImage(image, environment.cloudinaryRestaurantPreset)
+          .pipe(map((resp) => resp.secure_url))
+      : of(undefined);
+
+    imageUrl$
+      .pipe(
+        switchMap((imageUrl) => {
+          const data = removeEmptyFields({ ...this.form.getRawValue(), imageUrl });
+
+          return restaurant
+            ? this.restaurantsService.updateRestaurant(
+                restaurant.id,
+                data as Partial<NewRestaurant>,
               )
-              .subscribe({
-                next: (resp) => {
-                  this.closeModal();
-                  this.created.emit(resp);
-                },
-                error: (err: HttpErrorResponse) => {
-                  this.error.set(
-                    err.error?.error?.message ??
-                      'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
-                  );
-                },
-              });
-          },
-        });
-    } else {
-      this.restaurantsService
-        .createRestaurant(removeEmptyFields({ ...this.form.getRawValue() }) as NewRestaurant)
-        .subscribe({
-          next: (resp) => {
-            this.closeModal();
-            this.created.emit(resp);
-          },
-          error: (err: HttpErrorResponse) => {
-            this.error.set(
-              err.error?.error?.message ??
-                'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
-            );
-          },
-        });
-    }
+            : this.restaurantsService.createRestaurant(data as NewRestaurant);
+        }),
+      )
+      .subscribe({
+        next: (resp) => {
+          this.closeModal();
+          this.created.emit(resp);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.error.set(
+            err.error?.error?.message ??
+              'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
+          );
+        },
+      });
   }
 }

@@ -137,7 +137,7 @@
       <div class="form-actions">
         <button type="button" (click)="closeModal()" class="btn btn-secondary">Cancelar</button>
         <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
-          Crear restaurante
+          {{ editRestaurant() ? 'Guardar cambios' : 'Crear restaurante' }}
         </button>
       </div>
     </div>
