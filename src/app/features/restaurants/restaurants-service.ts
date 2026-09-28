@@ -16,4 +16,8 @@ export class RestaurantsService {
   createRestaurant(data: NewRestaurant) {
     return this.http.post<Restaurant>(`${environment.apiUrl}/restaurants`, data);
   }
+
+  updateRestaurant(restaurantId: number, data: Partial<NewRestaurant>) {
+    return this.http.patch<Restaurant>(`${environment.apiUrl}/restaurants/${restaurantId}`, data);
+  }
 }
