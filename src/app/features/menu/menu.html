@@ -10,7 +10,8 @@
         [menu]="menu"
         [categoryCount]="categoryCount()!"
         [dishCount]="dishCount()!"
-        (openCategoryModal)="modal.set({ type: 'createCategory' })"
+        (createCategoryModal)="modal.set({ type: 'createCategory' })"
+        (editCategoryModal)="modal.set({ type: 'editCategory', category: $event })"
         (openDishModal)="modal.set({ type: 'createDish', categoryId: $event })"
       />
     } @else {
@@ -18,7 +19,8 @@
         [menu]="menu"
         [categoryCount]="categoryCount()!"
         [dishCount]="dishCount()!"
-        (openCategoryModal)="modal.set({ type: 'createCategory' })"
+        (createCategoryModal)="modal.set({ type: 'createCategory' })"
+        (editCategoryModal)="modal.set({ type: 'editCategory', category: $event })"
         (openDishModal)="modal.set({ type: 'createDish', categoryId: $event })"
       />
     }
@@ -28,6 +30,14 @@
 @if (modal(); as activeModal) {
   @if (activeModal.type === 'createCategory') {
     <app-category-form [isOpen]="true" (close)="modal.set(null)" (created)="getRestaurantMenu()" />
+  }
+  @if (activeModal.type === 'editCategory') {
+    <app-category-form
+      [isOpen]="true"
+      (close)="modal.set(null)"
+      (created)="getRestaurantMenu()"
+      [editCategory]="activeModal.category"
+    />
   }
   @if (activeModal.type === 'createDish') {
     <app-dish-form

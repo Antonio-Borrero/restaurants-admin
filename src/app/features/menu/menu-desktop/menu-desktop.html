@@ -47,7 +47,7 @@
           </li>
         }
       </ul>
-      <button class="btn btn-primary new-category" (click)="openCategoryModal.emit()">
+      <button class="btn btn-primary new-category" (click)="createCategoryModal.emit()">
         + Nueva categoría
       </button>
     </aside>
@@ -62,7 +62,9 @@
           <button class="btn btn-secondary" (click)="openDishModal.emit(selectedCategory()?.id!)">
             + Plato
           </button>
-          <button class="btn btn-secondary">Editar</button>
+          <button class="btn btn-secondary" (click)="editCategoryModal.emit(selectedCategory()!)">
+            Editar
+          </button>
           <button class="btn btn-secondary delete-button">Eliminar</button>
         </div>
       </div>
