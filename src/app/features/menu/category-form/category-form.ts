@@ -1,4 +1,4 @@
-import { Component, inject, input, output, signal } from '@angular/core';
+import { Component, effect, inject, input, output, signal } from '@angular/core';
 import { Modal } from '../../../shared/modal/modal';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MenuService } from '../menu-service';
@@ -18,6 +18,20 @@ export class CategoryForm {
   public isOpen = input<boolean>(false);
   public close = output<void>();
   public created = output<void>();
+  public editCategory = input<Category | null>(null);
+
+  constructor() {
+    effect(() => {
+      const category = this.editCategory();
+      if (category) {
+        this.form.patchValue({
+          name: category.name,
+        });
+      } else {
+        this.form.reset();
+      }
+    });
+  }
 
   private fb = inject(FormBuilder);
   private menuService = inject(MenuService);
@@ -35,19 +49,27 @@ export class CategoryForm {
 
   protected submitForm() {
     const restaurantId = this.route.snapshot.paramMap.get('id')!;
-    this.menuService
-      .createCategory(restaurantId, this.form.getRawValue().name, DEFAULT_LOCALE)
-      .subscribe({
-        next: () => {
-          this.closeModal();
-          this.created.emit();
-        },
-        error: (err: HttpErrorResponse) => {
-          this.error.set(
-            err.error?.error?.message ??
-              'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
-          );
-        },
-      });
+    const category = this.editCategory();
+
+    return (
+      category
+        ? this.menuService.editCategory(category.id, this.form.getRawValue().name, DEFAULT_LOCALE)
+        : this.menuService.createCategory(
+            restaurantId,
+            this.form.getRawValue().name,
+            DEFAULT_LOCALE,
+          )
+    ).subscribe({
+      next: () => {
+        this.closeModal();
+        this.created.emit();
+      },
+      error: (err: HttpErrorResponse) => {
+        this.error.set(
+          err.error?.error?.message ??
+            'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
+        );
+      },
+    });
   }
 }
