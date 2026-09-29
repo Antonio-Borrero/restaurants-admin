@@ -1,4 +1,4 @@
-<dialog #modalDialog (close)="close.emit()" (click)="clickOutside($event)">
+<dialog #modalDialog (close)="close.emit()" (mousedown)="clickOutside($event)">
   <div class="content-wrapper">
     <ng-content></ng-content>
   </div>
