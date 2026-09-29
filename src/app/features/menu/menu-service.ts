@@ -24,4 +24,10 @@ export class MenuService {
   createDish(categoryId: number, data: NewDish) {
     return this.http.post(`${environment.apiUrl}/categories/${categoryId}/dishes`, data);
   }
+
+  editCategory(categoryId: number, name: string, locale: string) {
+    return this.http.patch(`${environment.apiUrl}/categories/${categoryId}`, {
+      translations: [{ name, locale }],
+    });
+  }
 }
