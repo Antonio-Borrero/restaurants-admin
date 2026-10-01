@@ -21,7 +21,7 @@ export class MenuService {
     });
   }
 
-  getDish(dishId: string, locale: string) {
+  getDish(dishId: number, locale: string) {
     return this.http.get<Dish>(`${environment.apiUrl}/dishes/${dishId}?locale=${locale}`);
   }
 

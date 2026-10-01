@@ -1,15 +1,16 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { catchError, of, switchMap } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CurrencyPipe, Location, UpperCasePipe } from '@angular/common';
 import { InitialsPipe } from '@shared/pipes/initials-pipe/initials-pipe';
 import { MenuService } from '../menu-service';
 import { DEFAULT_LOCALE } from '@core/default-locale';
+import { DishForm } from '../dish-form/dish-form';
+import { Dish as dishInterface } from '@shared/interfaces/menu-interface/menu-interface';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-dish',
-  imports: [InitialsPipe, UpperCasePipe, CurrencyPipe],
+  imports: [InitialsPipe, UpperCasePipe, CurrencyPipe, DishForm],
   templateUrl: './dish.html',
   styleUrl: './dish.scss',
 })
@@ -17,13 +18,37 @@ export class Dish {
   private route = inject(ActivatedRoute);
   private menuService = inject(MenuService);
   protected location = inject(Location);
+  protected mode = signal<'view' | 'edit'>('view');
+  protected dish = signal<dishInterface | undefined>(undefined);
+  protected error = signal<string>('');
 
-  protected dish = toSignal(
-    this.route.paramMap.pipe(
-      switchMap((param) => {
-        const id = param.get('id')!;
-        return this.menuService.getDish(id, DEFAULT_LOCALE).pipe(catchError(() => of(null)));
-      }),
-    ),
-  );
+  constructor() {
+    this.route.paramMap.subscribe((params) => {
+      const dishId = params.get('id');
+      if (dishId) {
+        this.loadDish(Number(dishId));
+      } else {
+        this.error.set('Plato no encontrado');
+      }
+    });
+  }
+
+  private loadDish(dishId: number) {
+    this.menuService.getDish(dishId, DEFAULT_LOCALE).subscribe({
+      next: (dish) => {
+        this.dish.set(dish);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.error.set(
+          err.error?.error?.message ??
+            'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
+        );
+      },
+    });
+  }
+
+  protected finishEditing() {
+    this.mode.set('view');
+    this.loadDish(this.dish()!.id);
+  }
 }
