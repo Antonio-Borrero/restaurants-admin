@@ -5,7 +5,7 @@ import { authGuard } from './core/auth-guard';
 import { Layout } from './shared/layout/layout';
 import { Register } from './features/register/register';
 import { Menu } from './features/menu/menu';
-import { Dish } from './features/dishes/dishes';
+import { Dish } from './features/menu/dish/dish';
 
 export const routes: Routes = [
   {
