@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { NewDish, RestaurantMenu } from '../../shared/menu-interface/menu-interface';
+import { Dish } from '../dishes/dishes';
 
 @Injectable({
   providedIn: 'root',
@@ -29,5 +30,9 @@ export class MenuService {
     return this.http.patch(`${environment.apiUrl}/categories/${categoryId}`, {
       translations: [{ name, locale }],
     });
+  }
+
+  editDish(dishId: number, data: Partial<NewDish>) {
+    return this.http.patch(`${environment.apiUrl}/dishes/${dishId}`, data);
   }
 }
