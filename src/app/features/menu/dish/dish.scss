@@ -14,7 +14,13 @@
   border-radius: 15px;
   overflow: hidden;
 
-  .image-placeholder {
+  .dish-image {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+  }
+
+  .dish-image-placeholder {
     background-color: var(--bg-dark);
     padding: 2rem;
     height: 15rem;

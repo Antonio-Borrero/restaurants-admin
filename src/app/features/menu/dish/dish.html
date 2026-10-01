@@ -16,9 +16,13 @@
     } @else if (dish(); as dish) {
       <article class="menu-dish">
         @if (dish.imageUrl) {
-          <img [src]="dish.imageUrl" [alt]="`Foto de ${dish.name ?? 'plato sin nombre'}`" />
+          <img
+            [src]="dish.imageUrl"
+            [alt]="`Foto de ${dish.name ?? 'plato sin nombre'}`"
+            class="dish-image"
+          />
         } @else {
-          <div class="image-placeholder">
+          <div class="dish-image-placeholder">
             <p>{{ dish.name ?? 'plato sin nombre' | Initials | uppercase }}</p>
           </div>
         }
