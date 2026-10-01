@@ -11,14 +11,14 @@ import {
 } from '@angular/core';
 import { NewRestaurant, Restaurant } from '../restaurant-interface';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CloudinaryService } from '../../../shared/cloudinary/cloudinary-service';
 import { RestaurantsService } from '../restaurants-service';
-import { removeEmptyFields } from '../../../shared/remove-empty-fields/remove-empty-fields';
+import { removeEmptyFields } from '@shared/utils/remove-empty-fields/remove-empty-fields';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DangerIcon } from '../../../shared/danger-icon/danger-icon';
-import { Modal } from '../../../shared/modal/modal';
-import { environment } from '../../../../environments/environment';
+import { DangerIcon } from '@shared/components/danger-icon/danger-icon';
+import { Modal } from '@shared/components/modal/modal';
+import { environment } from '@environments/environment';
 import { map, Observable, of, switchMap } from 'rxjs';
+import { CloudinaryService } from '@shared/services/cloudinary/cloudinary-service';
 
 @Component({
   selector: 'app-restaurant-form',

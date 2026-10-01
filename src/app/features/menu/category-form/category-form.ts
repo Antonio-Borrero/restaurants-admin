@@ -1,12 +1,12 @@
 import { Component, effect, inject, input, output, signal } from '@angular/core';
-import { Modal } from '../../../shared/modal/modal';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MenuService } from '../menu-service';
-import { DangerIcon } from '../../../shared/danger-icon/danger-icon';
 import { ActivatedRoute } from '@angular/router';
-import { DEFAULT_LOCALE } from '../../../core/default-locale';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Category } from '../../../shared/menu-interface/menu-interface';
+import { Modal } from '@shared/components/modal/modal';
+import { DangerIcon } from '@shared/components/danger-icon/danger-icon';
+import { Category } from '@shared/interfaces/menu-interface/menu-interface';
+import { MenuService } from '../menu-service';
+import { DEFAULT_LOCALE } from '@core/default-locale';
 
 @Component({
   selector: 'app-category-form',

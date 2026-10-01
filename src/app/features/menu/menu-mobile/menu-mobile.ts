@@ -1,6 +1,6 @@
 import { Component, computed, input, output, signal } from '@angular/core';
-import { Category, RestaurantMenu } from '../../../shared/menu-interface/menu-interface';
-import { PluralizePipe } from '../../../shared/pluralize-pipe/pluralize-pipe';
+import { Category, RestaurantMenu } from '@shared/interfaces/menu-interface/menu-interface';
+import { PluralizePipe } from '@shared/pipes/pluralize-pipe/pluralize-pipe';
 import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 

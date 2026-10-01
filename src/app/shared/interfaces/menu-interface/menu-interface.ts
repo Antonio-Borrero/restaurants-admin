@@ -18,6 +18,7 @@ export interface Dish {
   price: string;
   allergens: string[];
   imageUrl: string | null;
+  categoryId: number;
 }
 
 export interface NewDish {

@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { catchError, of, switchMap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CurrencyPipe, Location, UpperCasePipe } from '@angular/common';
-import { InitialsPipe } from '../../../shared/initials-pipe/initials-pipe';
-import { DEFAULT_LOCALE } from '../../../core/default-locale';
+import { InitialsPipe } from '@shared/pipes/initials-pipe/initials-pipe';
 import { MenuService } from '../menu-service';
+import { DEFAULT_LOCALE } from '@core/default-locale';
 
 @Component({
   selector: 'app-dish',

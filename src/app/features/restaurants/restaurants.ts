@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { RestaurantsService } from './restaurants-service';
-import { InitialsPipe } from '../../shared/initials-pipe/initials-pipe';
+import { InitialsPipe } from '@shared/pipes/initials-pipe/initials-pipe';
 import { UpperCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Restaurant } from './restaurant-interface';

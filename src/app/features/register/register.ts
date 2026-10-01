@@ -6,15 +6,15 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { Auth } from '../../core/auth';
+import { Auth } from '@core/auth';
 import { Router, RouterLink } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Logo } from '../../shared/logo/logo';
-import { DangerIcon } from '../../shared/danger-icon/danger-icon';
-import { breakpointMobile } from '../../shared/breakpoints/breakpoints';
+import { Logo } from '@shared/components/logo/logo';
+import { DangerIcon } from '@shared/components/danger-icon/danger-icon';
+import { breakpointMobile } from '@shared/constants/breakpoints/breakpoints';
 
 function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
   const password = control.get('password')?.value;

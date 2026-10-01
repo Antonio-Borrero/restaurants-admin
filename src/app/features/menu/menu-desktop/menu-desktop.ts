@@ -1,8 +1,8 @@
 import { Component, computed, input, output, signal } from '@angular/core';
-import { Category, Dish, RestaurantMenu } from '../../../shared/menu-interface/menu-interface';
-import { PluralizePipe } from '../../../shared/pluralize-pipe/pluralize-pipe';
+import { Category, Dish, RestaurantMenu } from '@shared/interfaces/menu-interface/menu-interface';
+import { PluralizePipe } from '@shared/pipes/pluralize-pipe/pluralize-pipe';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
-import { InitialsPipe } from '../../../shared/initials-pipe/initials-pipe';
+import { InitialsPipe } from '@shared/pipes/initials-pipe/initials-pipe';
 
 @Component({
   selector: 'app-menu-desktop',

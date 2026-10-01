@@ -4,11 +4,11 @@ import { MenuService } from './menu-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { breakpointMobile } from '../../shared/breakpoints/breakpoints';
+import { breakpointMobile } from '@shared/constants/breakpoints/breakpoints';
 import { MenuDesktop } from './menu-desktop/menu-desktop';
 import { MenuMobile } from './menu-mobile/menu-mobile';
-import { Category, Dish, RestaurantMenu } from '../../shared/menu-interface/menu-interface';
-import { DEFAULT_LOCALE } from '../../core/default-locale';
+import { Category, Dish, RestaurantMenu } from '@shared/interfaces/menu-interface/menu-interface';
+import { DEFAULT_LOCALE } from '@core/default-locale';
 import { CategoryForm } from './category-form/category-form';
 import { DishForm } from './dish-form/dish-form';
 

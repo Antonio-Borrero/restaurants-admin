@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { Logo } from '../logo/logo';
-import { Auth } from '../../core/auth';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs';
-import { breakpointMobile } from '../breakpoints/breakpoints';
+import { Logo } from '../logo/logo';
+import { Auth } from '@core/auth';
+import { breakpointMobile } from '../../constants/breakpoints/breakpoints';
 
 @Component({
   selector: 'app-layout',

@@ -10,17 +10,17 @@ import {
   viewChild,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Modal } from '../../../shared/modal/modal';
-import { DangerIcon } from '../../../shared/danger-icon/danger-icon';
-import { DEFAULT_LOCALE, DEFAULT_LOCALE_CURRENCY } from '../../../core/default-locale';
-import { ALLERGENS } from '../allergens';
+import { Modal } from '@shared/components/modal/modal';
+import { DangerIcon } from '@shared/components/danger-icon/danger-icon';
+import { DEFAULT_LOCALE, DEFAULT_LOCALE_CURRENCY } from '@core/default-locale';
 import { MenuService } from '../menu-service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CloudinaryService } from '../../../shared/cloudinary/cloudinary-service';
-import { removeEmptyFields } from '../../../shared/remove-empty-fields/remove-empty-fields';
-import { Dish, NewDish } from '../../../shared/menu-interface/menu-interface';
-import { environment } from '../../../../environments/environment';
+import { removeEmptyFields } from '@shared/utils/remove-empty-fields/remove-empty-fields';
+import { Dish, NewDish } from '@shared/interfaces/menu-interface/menu-interface';
+import { environment } from '@environments/environment';
 import { map, Observable, of, switchMap } from 'rxjs';
+import { CloudinaryService } from '@shared/services/cloudinary/cloudinary-service';
+import { ALLERGENS } from '../allergens';
 
 @Component({
   selector: 'app-dish-form',

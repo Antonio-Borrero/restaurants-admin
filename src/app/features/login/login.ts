@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Auth } from '../../core/auth';
 import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Logo } from '../../shared/logo/logo';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-import { DangerIcon } from '../../shared/danger-icon/danger-icon';
-import { breakpointMobile } from '../../shared/breakpoints/breakpoints';
+import { Auth } from '@core/auth';
+import { DangerIcon } from '@shared/components/danger-icon/danger-icon';
+import { breakpointMobile } from '@shared/constants/breakpoints/breakpoints';
+import { Logo } from '@shared/components/logo/logo';
 
 @Component({
   selector: 'app-login',
