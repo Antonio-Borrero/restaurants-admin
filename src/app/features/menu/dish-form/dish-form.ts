@@ -1,6 +1,7 @@
 import {
   Component,
   computed,
+  effect,
   ElementRef,
   inject,
   input,
@@ -17,8 +18,9 @@ import { MenuService } from '../menu-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CloudinaryService } from '../../../shared/cloudinary/cloudinary-service';
 import { removeEmptyFields } from '../../../shared/remove-empty-fields/remove-empty-fields';
-import { NewDish } from '../../../shared/menu-interface/menu-interface';
+import { Dish, NewDish } from '../../../shared/menu-interface/menu-interface';
 import { environment } from '../../../../environments/environment';
+import { map, Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-dish-form',
@@ -33,6 +35,41 @@ export class DishForm {
   public categoryId = input.required<number>();
   private menuService = inject(MenuService);
   private cloudinaryService = inject(CloudinaryService);
+  public editDish = input<Dish | null>(null);
+
+  constructor() {
+    effect(() => {
+      const dish = this.editDish();
+      if (dish) {
+        this.form.patchValue({
+          name: dish.name ?? '',
+          price: dish.price,
+          originalName: dish.originalName ?? '',
+          description: dish.description ?? '',
+        });
+        this.allergensState.set(
+          ALLERGENS.reduce(
+            (acc, allergen) => {
+              acc[allergen] = dish.allergens.includes(allergen);
+              return acc;
+            },
+            {} as Record<string, boolean>,
+          ),
+        );
+      } else {
+        this.form.reset();
+        this.allergensState.set(
+          ALLERGENS.reduce(
+            (acc, allergen) => {
+              acc[allergen] = false;
+              return acc;
+            },
+            {} as Record<string, boolean>,
+          ),
+        );
+      }
+    });
+  }
 
   private fb = inject(FormBuilder);
   protected imageFile = viewChild<ElementRef<HTMLInputElement>>('imageInput');
@@ -40,15 +77,7 @@ export class DishForm {
   protected error = signal<string>('');
   protected currency = DEFAULT_LOCALE_CURRENCY;
   protected allergens = ALLERGENS;
-  protected allergensState = signal<Record<string, boolean>>(
-    ALLERGENS.reduce(
-      (acc, allergen) => {
-        acc[allergen] = false;
-        return acc;
-      },
-      {} as Record<string, boolean>,
-    ),
-  );
+  protected allergensState = signal<Record<string, boolean>>({});
 
   protected form = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
@@ -63,6 +92,9 @@ export class DishForm {
   }
 
   protected imagePreview = computed(() => {
+    if (this.editDish() && !this.image()) {
+      return this.editDish()?.imageUrl;
+    }
     const file = this.image();
     return file ? URL.createObjectURL(file) : null;
   });
@@ -79,9 +111,17 @@ export class DishForm {
   }
 
   protected submitForm() {
+    const image = this.image();
+    const dish = this.editDish();
     const allergens = Object.entries(this.allergensState())
       .filter(([, state]) => state)
       .map(([allergen]) => allergen);
+
+    const imageUrl$: Observable<string | undefined> = image
+      ? this.cloudinaryService
+          .uploadImage(image, environment.cloudinaryRestaurantPreset)
+          .pipe(map((resp) => resp.secure_url))
+      : of(undefined);
 
     const data = {
       price: Number(this.form.getRawValue().price),
@@ -96,45 +136,28 @@ export class DishForm {
       ],
     };
 
-    if (this.image()) {
-      this.cloudinaryService
-        .uploadImage(this.image()!, environment.cloudinaryDishPreset)
-        .subscribe({
-          next: (resp) => {
-            this.menuService
-              .createDish(
-                this.categoryId(),
-                removeEmptyFields({ ...data, imageUrl: resp.secure_url }) as NewDish,
-              )
-              .subscribe({
-                next: () => {
-                  this.closeModal();
-                  this.created.emit();
-                },
-                error: (err: HttpErrorResponse) => {
-                  this.error.set(
-                    err.error?.error?.message ??
-                      'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
-                  );
-                },
-              });
-          },
-        });
-    } else {
-      this.menuService
-        .createDish(this.categoryId(), removeEmptyFields({ ...data }) as NewDish)
-        .subscribe({
-          next: () => {
-            this.closeModal();
-            this.created.emit();
-          },
-          error: (err: HttpErrorResponse) => {
-            this.error.set(
-              err.error?.error?.message ??
-                'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
-            );
-          },
-        });
-    }
+    imageUrl$
+      .pipe(
+        switchMap((imageUrl) => {
+          const fullData = removeEmptyFields({ ...data, imageUrl });
+
+          return dish
+            ? this.menuService.editDish(dish.id, fullData as NewDish)
+            : this.menuService.createDish(this.categoryId(), fullData as NewDish);
+        }),
+      )
+
+      .subscribe({
+        next: () => {
+          this.closeModal();
+          this.created.emit();
+        },
+        error: (err: HttpErrorResponse) => {
+          this.error.set(
+            err.error?.error?.message ??
+              'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
+          );
+        },
+      });
   }
 }

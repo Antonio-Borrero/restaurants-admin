@@ -9,7 +9,7 @@
     @if (form.controls.price.touched && form.controls.price.invalid) {
       <p class="error"><app-danger-icon [width]="20" />El precio del plato es obligatorio</p>
     }
-    <h3>Nuevo plato</h3>
+    <h3>{{ editDish() ? 'Editar plato' : 'Nuevo plato' }}</h3>
     <div class="form-body">
       <div class="dish-identity">
         <div class="dish-name">
@@ -130,7 +130,9 @@
 
     <div class="form-actions">
       <button type="button" (click)="closeModal()" class="btn btn-secondary">Cancelar</button>
-      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Crear plato</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        {{ editDish() ? 'Guardar cambios' : 'Crear plato' }}
+      </button>
     </div>
   </form>
 </app-modal>
