@@ -1,5 +1,5 @@
 import { Component, computed, input, output, signal } from '@angular/core';
-import { Category, RestaurantMenu } from '../../../shared/menu-interface/menu-interface';
+import { Category, Dish, RestaurantMenu } from '../../../shared/menu-interface/menu-interface';
 import { PluralizePipe } from '../../../shared/pluralize-pipe/pluralize-pipe';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { InitialsPipe } from '../../../shared/initials-pipe/initials-pipe';
@@ -23,5 +23,6 @@ export class MenuDesktop {
   });
   public createCategoryModal = output<void>();
   public editCategoryModal = output<Category>();
-  public openDishModal = output<number>();
+  public createDishModal = output<number>();
+  public editDishModal = output<{ dish: Dish; categoryId: number }>();
 }

@@ -7,7 +7,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { breakpointMobile } from '../../shared/breakpoints/breakpoints';
 import { MenuDesktop } from './menu-desktop/menu-desktop';
 import { MenuMobile } from './menu-mobile/menu-mobile';
-import { Category, RestaurantMenu } from '../../shared/menu-interface/menu-interface';
+import { Category, Dish, RestaurantMenu } from '../../shared/menu-interface/menu-interface';
 import { DEFAULT_LOCALE } from '../../core/default-locale';
 import { CategoryForm } from './category-form/category-form';
 import { DishForm } from './dish-form/dish-form';
@@ -16,6 +16,7 @@ type Modal =
   | { type: 'createCategory' }
   | { type: 'editCategory'; category: Category }
   | { type: 'createDish'; categoryId: number }
+  | { type: 'editDish'; categoryId: number; dish: Dish }
   | null;
 
 @Component({

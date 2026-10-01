@@ -21,7 +21,10 @@
         [dishCount]="dishCount()!"
         (createCategoryModal)="modal.set({ type: 'createCategory' })"
         (editCategoryModal)="modal.set({ type: 'editCategory', category: $event })"
-        (openDishModal)="modal.set({ type: 'createDish', categoryId: $event })"
+        (createDishModal)="modal.set({ type: 'createDish', categoryId: $event })"
+        (editDishModal)="
+          modal.set({ type: 'editDish', categoryId: $event.categoryId, dish: $event.dish })
+        "
       />
     }
   }
@@ -45,6 +48,15 @@
       (close)="modal.set(null)"
       (created)="getRestaurantMenu()"
       [categoryId]="activeModal.categoryId"
+    />
+  }
+  @if (activeModal.type === 'editDish') {
+    <app-dish-form
+      [isOpen]="true"
+      (close)="modal.set(null)"
+      (created)="getRestaurantMenu()"
+      [categoryId]="activeModal.categoryId"
+      [editDish]="activeModal.dish"
     />
   }
 }

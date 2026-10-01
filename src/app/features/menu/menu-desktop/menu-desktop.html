@@ -59,7 +59,7 @@
           <span>{{ selectedCategory()!.dishes.length | Pluralize: 'plato' : 'platos' }}</span>
         </div>
         <div class="category-actions">
-          <button class="btn btn-secondary" (click)="openDishModal.emit(selectedCategory()?.id!)">
+          <button class="btn btn-secondary" (click)="createDishModal.emit(selectedCategory()?.id!)">
             + Plato
           </button>
           <button class="btn btn-secondary" (click)="editCategoryModal.emit(selectedCategory()!)">
@@ -92,7 +92,12 @@
               <span>{{ dish.price | currency: 'EUR' }}</span>
             </article>
             <div class="dish-actions">
-              <button class="btn btn-secondary">Editar</button>
+              <button
+                class="btn btn-secondary"
+                (click)="editDishModal.emit({ dish, categoryId: selectedCategory()?.id! })"
+              >
+                Editar
+              </button>
               <button class="btn btn-secondary delete-button">Eliminar</button>
             </div>
           </li>
