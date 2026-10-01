@@ -112,9 +112,9 @@
       textarea {
         max-width: 100%;
         line-height: 1.5;
-        resize: vertical;
         letter-spacing: 0;
         font-family: var(--font);
+        resize: none;
 
         &:placeholder-shown {
           color: var(--text-muted);

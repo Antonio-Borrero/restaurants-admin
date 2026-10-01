@@ -83,7 +83,7 @@ export class DishForm {
     name: ['', [Validators.required]],
     price: ['', [Validators.required]],
     originalName: [''],
-    description: [''],
+    description: ['', [Validators.maxLength(300)]],
     imageUrl: [''],
   });
 
