@@ -7,7 +7,7 @@
   --bg-secondary: #fdfaf7;
   --bg-dark: #e9e2d9;
   --bg-pills: #f4e0d6;
-  --bg-danger: #f8eae6;
+  --bg-danger: #8e3527;
 
   /* Text */
   --text: #332c27;
@@ -121,6 +121,16 @@ body {
     background: var(--hover-transparent);
     border-color: var(--hover-border);
     color: var(--hover-text);
+  }
+}
+
+.btn-danger {
+  background: var(--bg-danger);
+  border: 1px solid var(--border-danger);
+  color: var(--text-on-dark);
+  &:hover {
+    background: var(--hover-danger);
+    border-color: var(--hover-danger);
   }
 }
 
