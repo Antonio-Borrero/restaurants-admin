@@ -25,6 +25,7 @@
         (editDishModal)="
           modal.set({ type: 'editDish', categoryId: $event.categoryId, dish: $event.dish })
         "
+        (deleteDishModal)="modal.set({ type: 'deleteDish', dish: $event }); error.set(null)"
       />
     }
   }
@@ -57,6 +58,15 @@
       (created)="getRestaurantMenu()"
       [categoryId]="activeModal.categoryId"
       [editDish]="activeModal.dish"
+    />
+  }
+  @if (activeModal.type === 'deleteDish') {
+    <app-delete-modal
+      [isOpen]="true"
+      [dishName]="activeModal.dish.name!"
+      (close)="modal.set(null)"
+      (delete)="deleteDish(activeModal.dish.id!)"
+      [errorMessage]="error()"
     />
   }
 }

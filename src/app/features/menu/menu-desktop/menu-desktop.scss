@@ -135,11 +135,6 @@
         button {
           padding: 0.6rem 1rem;
         }
-
-        .delete-button {
-          border-color: var(--border-danger);
-          color: var(--text-danger);
-        }
       }
     }
 
@@ -226,11 +221,10 @@
 
           button {
             background: var(--bg-secondary);
-          }
 
-          .delete-button {
-            color: var(--text-danger);
-            border-color: var(--border-danger);
+            &:hover {
+              background: var(--hover-transparent);
+            }
           }
         }
       }

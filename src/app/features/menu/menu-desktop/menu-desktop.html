@@ -98,7 +98,9 @@
               >
                 Editar
               </button>
-              <button class="btn btn-secondary delete-button">Eliminar</button>
+              <button class="btn btn-secondary delete-button" (click)="deleteDishModal.emit(dish)">
+                Eliminar
+              </button>
             </div>
           </li>
         } @empty {

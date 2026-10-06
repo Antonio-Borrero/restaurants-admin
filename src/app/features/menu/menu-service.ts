@@ -38,4 +38,8 @@ export class MenuService {
   editDish(dishId: number, data: Partial<NewDish>) {
     return this.http.patch(`${environment.apiUrl}/dishes/${dishId}`, data);
   }
+
+  deleteDish(dishId: number) {
+    return this.http.delete(`${environment.apiUrl}/dishes/${dishId}`);
+  }
 }

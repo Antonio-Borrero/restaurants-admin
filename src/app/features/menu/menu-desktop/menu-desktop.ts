@@ -25,4 +25,5 @@ export class MenuDesktop {
   public editCategoryModal = output<Category>();
   public createDishModal = output<number>();
   public editDishModal = output<{ dish: Dish; categoryId: number }>();
+  public deleteDishModal = output<Dish>();
 }

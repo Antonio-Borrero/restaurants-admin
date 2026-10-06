@@ -11,17 +11,20 @@ import { Category, Dish, RestaurantMenu } from '@shared/interfaces/menu-interfac
 import { DEFAULT_LOCALE } from '@core/default-locale';
 import { CategoryForm } from './category-form/category-form';
 import { DishForm } from './dish-form/dish-form';
+import { DeleteModal } from '@shared/components/delete-modal/delete-modal';
+import { HttpErrorResponse } from '@angular/common/http';
 
 type Modal =
   | { type: 'createCategory' }
   | { type: 'editCategory'; category: Category }
   | { type: 'createDish'; categoryId: number }
   | { type: 'editDish'; categoryId: number; dish: Dish }
+  | { type: 'deleteDish'; dish: Dish }
   | null;
 
 @Component({
   selector: 'app-menu',
-  imports: [RouterLink, MenuDesktop, MenuMobile, CategoryForm, DishForm],
+  imports: [RouterLink, MenuDesktop, MenuMobile, CategoryForm, DishForm, DeleteModal],
   templateUrl: './menu.html',
   styleUrl: './menu.scss',
 })
@@ -36,6 +39,7 @@ export class Menu {
   protected menu = signal<RestaurantMenu | null>(null);
   private restaurantId = '';
   protected modal = signal<Modal>(null);
+  protected error = signal<string | null>(null);
 
   constructor() {
     this.route.paramMap.subscribe({
@@ -53,6 +57,21 @@ export class Menu {
       .pipe(map((result) => result.matches)),
     { initialValue: true },
   );
+
+  protected deleteDish(dishId: number) {
+    this.menuService.deleteDish(dishId).subscribe({
+      next: () => {
+        this.getRestaurantMenu();
+        this.modal.set(null);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.error.set(
+          err.error?.error?.message ??
+            'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
+        );
+      },
+    });
+  }
 
   protected getRestaurantMenu() {
     this.menuService.getRestaurantMenu(this.restaurantId, DEFAULT_LOCALE).subscribe({
