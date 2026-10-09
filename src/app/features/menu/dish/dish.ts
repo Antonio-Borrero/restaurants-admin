@@ -7,10 +7,11 @@ import { DEFAULT_LOCALE } from '@core/default-locale';
 import { DishForm } from '../dish-form/dish-form';
 import { Dish as dishInterface } from '@shared/interfaces/menu-interface/menu-interface';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DeleteModal } from '@shared/components/delete-modal/delete-modal';
 
 @Component({
   selector: 'app-dish',
-  imports: [InitialsPipe, UpperCasePipe, CurrencyPipe, DishForm],
+  imports: [InitialsPipe, UpperCasePipe, CurrencyPipe, DishForm, DeleteModal],
   templateUrl: './dish.html',
   styleUrl: './dish.scss',
 })
@@ -18,7 +19,7 @@ export class Dish {
   private route = inject(ActivatedRoute);
   private menuService = inject(MenuService);
   protected location = inject(Location);
-  protected mode = signal<'view' | 'edit'>('view');
+  protected mode = signal<'view' | 'edit' | 'delete'>('view');
   protected dish = signal<dishInterface | undefined>(undefined);
   protected error = signal<string>('');
 
@@ -50,5 +51,19 @@ export class Dish {
   protected finishEditing() {
     this.mode.set('view');
     this.loadDish(this.dish()!.id);
+  }
+
+  protected deleteDish(dishId: number) {
+    this.menuService.deleteDish(dishId).subscribe({
+      next: () => {
+        this.location.back();
+      },
+      error: (err: HttpErrorResponse) => {
+        this.error.set(
+          err.error?.error?.message ??
+            'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
+        );
+      },
+    });
   }
 }

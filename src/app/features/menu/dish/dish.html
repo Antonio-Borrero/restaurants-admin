@@ -8,6 +8,14 @@
       (close)="mode.set('view')"
       (created)="finishEditing()"
     />
+  } @else if (mode() === 'delete') {
+    <app-delete-modal
+      [isOpen]="true"
+      [dishName]="dish()!.name ?? 'plato sin nombre'"
+      (close)="mode.set('view')"
+      (delete)="deleteDish(dish()!.id)"
+      [errorMessage]="error()"
+    />
   } @else {
     @if (error()) {
       <div class="error">
@@ -41,7 +49,12 @@
         </div>
         <div class="dish-actions">
           <button class="btn btn-secondary" (click)="mode.set('edit')">Editar plato</button>
-          <button class="btn btn-secondary delete-button">Eliminar</button>
+          <button
+            class="btn btn-secondary delete-button"
+            (click)="mode.set('delete'); error.set('')"
+          >
+            Eliminar
+          </button>
         </div>
       </article>
     } @else {
