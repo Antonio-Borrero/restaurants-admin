@@ -34,7 +34,7 @@
               <p>{{ category.dishes.length | Pluralize: 'plato' : 'platos' }}</p>
             </div>
           </button>
-          @if (isSelected && category.dishes.length > 0) {
+          @if (isSelected) {
             <ul class="dish-list">
               @for (dish of category.dishes; track dish.id) {
                 <li>
