@@ -27,6 +27,10 @@ export class MenuService {
     });
   }
 
+  deleteCategory(categoryId: number) {
+    return this.http.delete(`${environment.apiUrl}/categories/${categoryId}`);
+  }
+
   getDish(dishId: number, locale: string) {
     return this.http.get<Dish>(`${environment.apiUrl}/dishes/${dishId}?locale=${locale}`);
   }
