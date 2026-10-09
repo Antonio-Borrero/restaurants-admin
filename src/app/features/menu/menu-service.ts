@@ -21,18 +21,18 @@ export class MenuService {
     });
   }
 
+  editCategory(categoryId: number, name: string, locale: string) {
+    return this.http.patch(`${environment.apiUrl}/categories/${categoryId}`, {
+      translations: [{ name, locale }],
+    });
+  }
+
   getDish(dishId: number, locale: string) {
     return this.http.get<Dish>(`${environment.apiUrl}/dishes/${dishId}?locale=${locale}`);
   }
 
   createDish(categoryId: number, data: NewDish) {
     return this.http.post(`${environment.apiUrl}/categories/${categoryId}/dishes`, data);
-  }
-
-  editCategory(categoryId: number, name: string, locale: string) {
-    return this.http.patch(`${environment.apiUrl}/categories/${categoryId}`, {
-      translations: [{ name, locale }],
-    });
   }
 
   editDish(dishId: number, data: Partial<NewDish>) {
