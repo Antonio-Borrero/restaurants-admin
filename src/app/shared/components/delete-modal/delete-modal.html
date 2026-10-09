@@ -6,8 +6,8 @@
         <button type="button" class="btn btn-primary" (click)="close.emit()">Cerrar</button>
       </div>
     } @else {
-      <h3>Eliminar plato</h3>
-      <p>¿Estás seguro de que quieres eliminar "{{ dishName() }}"?</p>
+      <h3>{{ title() }}</h3>
+      <p>{{ message() }}</p>
       <div class="delete-modal-actions">
         <button type="button" class="btn btn-secondary" (click)="close.emit()">Cancelar</button>
         <button type="submit" class="btn btn-danger" (click)="delete.emit()">Eliminar</button>

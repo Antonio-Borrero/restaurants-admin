@@ -11,7 +11,8 @@
   } @else if (mode() === 'delete') {
     <app-delete-modal
       [isOpen]="true"
-      [dishName]="dish()!.name ?? 'plato sin nombre'"
+      title="Eliminar plato"
+      [message]="`¿Estás seguro de que quieres eliminar &quot;${dish()!.name}&quot;?`"
       (close)="mode.set('view')"
       (delete)="deleteDish(dish()!.id)"
       [errorMessage]="error()"

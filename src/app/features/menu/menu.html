@@ -63,7 +63,8 @@
   @if (activeModal.type === 'deleteDish') {
     <app-delete-modal
       [isOpen]="true"
-      [dishName]="activeModal.dish.name!"
+      title="Eliminar plato"
+      [message]="`¿Estás seguro de que quieres eliminar &quot;${activeModal.dish.name}&quot;?`"
       (close)="modal.set(null)"
       (delete)="deleteDish(activeModal.dish.id!)"
       [errorMessage]="error()"

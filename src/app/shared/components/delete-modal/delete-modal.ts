@@ -9,7 +9,8 @@ import { Modal } from '../modal/modal';
 })
 export class DeleteModal {
   public isOpen = input<boolean>(false);
-  public dishName = input<string>('');
+  public title = input.required<string>();
+  public message = input<string>('');
   public close = output<void>();
   public delete = output<void>();
   public errorMessage = input<string | null>(null);
