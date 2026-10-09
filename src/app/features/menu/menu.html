@@ -12,6 +12,9 @@
         [dishCount]="dishCount()!"
         (createCategoryModal)="modal.set({ type: 'createCategory' })"
         (editCategoryModal)="modal.set({ type: 'editCategory', category: $event })"
+        (deleteCategoryModal)="
+          modal.set({ type: 'deleteCategory', category: $event }); error.set(null)
+        "
         (openDishModal)="modal.set({ type: 'createDish', categoryId: $event })"
       />
     } @else {
@@ -21,6 +24,9 @@
         [dishCount]="dishCount()!"
         (createCategoryModal)="modal.set({ type: 'createCategory' })"
         (editCategoryModal)="modal.set({ type: 'editCategory', category: $event })"
+        (deleteCategoryModal)="
+          modal.set({ type: 'deleteCategory', category: $event }); error.set(null)
+        "
         (createDishModal)="modal.set({ type: 'createDish', categoryId: $event })"
         (editDishModal)="
           modal.set({ type: 'editDish', categoryId: $event.categoryId, dish: $event.dish })
@@ -41,6 +47,20 @@
       (close)="modal.set(null)"
       (created)="getRestaurantMenu()"
       [editCategory]="activeModal.category"
+    />
+  }
+  @if (activeModal.type === 'deleteCategory') {
+    <app-delete-modal
+      [isOpen]="true"
+      title="Eliminar categoría"
+      [message]="
+        activeModal.category.dishes.length > 0
+          ? `Esta categoría tiene ${activeModal.category.dishes.length} platos asociados. ¿Estás seguro de que quieres eliminarla?`
+          : `¿Estás seguro de que quieres eliminar &quot;${activeModal.category.name}&quot;?`
+      "
+      (close)="modal.set(null)"
+      (delete)="deleteCategory(activeModal.category.id)"
+      [errorMessage]="error()"
     />
   }
   @if (activeModal.type === 'createDish') {

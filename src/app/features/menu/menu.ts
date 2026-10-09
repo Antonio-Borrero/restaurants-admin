@@ -17,6 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 type Modal =
   | { type: 'createCategory' }
   | { type: 'editCategory'; category: Category }
+  | { type: 'deleteCategory'; category: Category }
   | { type: 'createDish'; categoryId: number }
   | { type: 'editDish'; categoryId: number; dish: Dish }
   | { type: 'deleteDish'; dish: Dish }
@@ -60,6 +61,21 @@ export class Menu {
 
   protected deleteDish(dishId: number) {
     this.menuService.deleteDish(dishId).subscribe({
+      next: () => {
+        this.getRestaurantMenu();
+        this.modal.set(null);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.error.set(
+          err.error?.error?.message ??
+            'No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.',
+        );
+      },
+    });
+  }
+
+  protected deleteCategory(categoryId: number) {
+    this.menuService.deleteCategory(categoryId).subscribe({
       next: () => {
         this.getRestaurantMenu();
         this.modal.set(null);

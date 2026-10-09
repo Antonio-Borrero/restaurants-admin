@@ -23,6 +23,8 @@ export class MenuDesktop {
   });
   public createCategoryModal = output<void>();
   public editCategoryModal = output<Category>();
+  public deleteCategoryModal = output<Category>();
+
   public createDishModal = output<number>();
   public editDishModal = output<{ dish: Dish; categoryId: number }>();
   public deleteDishModal = output<Dish>();

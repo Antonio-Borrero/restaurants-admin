@@ -65,7 +65,13 @@
           <button class="btn btn-secondary" (click)="editCategoryModal.emit(selectedCategory()!)">
             Editar
           </button>
-          <button class="btn btn-secondary delete-button">Eliminar</button>
+
+          <button
+            class="btn btn-secondary delete-button"
+            (click)="deleteCategoryModal.emit(selectedCategory()!)"
+          >
+            Eliminar
+          </button>
         </div>
       </div>
       <ul class="dish-list">

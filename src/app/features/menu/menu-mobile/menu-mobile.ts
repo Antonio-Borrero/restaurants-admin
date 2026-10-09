@@ -23,5 +23,6 @@ export class MenuMobile {
   });
   public createCategoryModal = output<void>();
   public editCategoryModal = output<Category>();
+  public deleteCategoryModal = output<Category>();
   public openDishModal = output<number>();
 }

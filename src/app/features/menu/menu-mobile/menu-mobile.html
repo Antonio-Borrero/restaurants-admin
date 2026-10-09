@@ -72,7 +72,12 @@
               >
                 Editar
               </button>
-              <button class="btn btn-secondary delete-button">Eliminar</button>
+              <button
+                class="btn btn-secondary delete-button"
+                (click)="deleteCategoryModal.emit(selectedCategory()!)"
+              >
+                Eliminar
+              </button>
             </div>
           }
         </article>
