@@ -20,4 +20,10 @@ export class RestaurantsService {
   updateRestaurant(restaurantId: number, data: Partial<NewRestaurant>) {
     return this.http.patch<Restaurant>(`${environment.apiUrl}/restaurants/${restaurantId}`, data);
   }
+
+  deleteRestaurant(restaurantId: number) {
+    return this.http.delete(`${environment.apiUrl}/restaurants/${restaurantId}`, {
+      params: { confirm: true },
+    });
+  }
 }
