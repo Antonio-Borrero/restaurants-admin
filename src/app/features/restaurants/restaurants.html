@@ -150,6 +150,21 @@
       [editRestaurant]="activeModal.restaurant"
       (close)="modal.set(null)"
       (created)="updateRestaurantsList($event)"
+      (deleteRestaurantModal)="
+        modal.set({ type: 'deleteRestaurant', restaurant: $event }); error.set(null)
+      "
+    />
+  }
+  @if (activeModal.type === 'deleteRestaurant') {
+    <app-delete-modal
+      [isOpen]="true"
+      title="Eliminar restaurante"
+      [message]="
+        `${activeModal.restaurant.categoryCount > 0 ? `Este restaurante tiene ${activeModal.restaurant.categoryCount} categorías${activeModal.restaurant.dishCount > 0 ? ` y ${activeModal.restaurant.dishCount} platos.` : '.'}` : ''} ¿Estás seguro de que quieres eliminar ${activeModal.restaurant.name}?`
+      "
+      (close)="modal.set(null)"
+      (delete)="deleteRestaurant(activeModal.restaurant.id)"
+      [errorMessage]="error()"
     />
   }
 }

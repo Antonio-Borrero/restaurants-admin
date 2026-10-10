@@ -31,6 +31,7 @@ export class RestaurantForm {
   public close = output<void>();
   public created = output<Restaurant>();
   public editRestaurant = input<Restaurant | null>(null);
+  public deleteRestaurantModal = output<Restaurant>();
 
   constructor() {
     effect(() => {

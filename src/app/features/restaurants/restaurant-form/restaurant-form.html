@@ -144,7 +144,13 @@
     @if (editRestaurant()) {
       <div class="danger-section">
         <span>Eliminar el restaurante también borra toda su carta</span>
-        <button type="button" class="btn btn-secondary delete-button">Eliminar</button>
+        <button
+          type="button"
+          class="btn btn-secondary delete-button"
+          (click)="deleteRestaurantModal.emit(editRestaurant()!)"
+        >
+          Eliminar
+        </button>
       </div>
     }
   </form>
