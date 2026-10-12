@@ -28,7 +28,9 @@ export class MenuService {
   }
 
   deleteCategory(categoryId: number) {
-    return this.http.delete(`${environment.apiUrl}/categories/${categoryId}`);
+    return this.http.delete(`${environment.apiUrl}/categories/${categoryId}`, {
+      params: { confirm: true },
+    });
   }
 
   getDish(dishId: number, locale: string) {
