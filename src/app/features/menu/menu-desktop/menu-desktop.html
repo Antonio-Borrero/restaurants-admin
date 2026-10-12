@@ -123,7 +123,9 @@
       Empieza creando una categoría, por ejemplo <span>Entradas</span>, y luego agrega los platos
       que van dentro.
     </p>
-    <button class="btn btn-primary">+ Crear primera categoría</button>
+    <button class="btn btn-primary" (click)="createCategoryModal.emit()">
+      + Crear primera categoría
+    </button>
     <p class="empty-menu-note">Podrás renombrarla o eliminarla cuando quieras.</p>
   </div>
 }
