@@ -10,7 +10,7 @@ Admin panel (Angular) that consumes restaurants-api's protected routes. Agreed m
 - Commits: Conventional Commits with scope, in English. Format: `type(scope): message` — e.g. `feat(login): add auth guard`, `fix(menu): correct validation on create form`
 - Scope = the feature folder the change touches: `login`, `register`, `restaurants`, `menu`. Use `core` or `shared` when the change isn't feature-specific, or `app` for the root app shell (`src/app/app.*`)
 - Scope is optional: omit it for repo-level files not tied to any folder (this file, README, CI config) — e.g. `docs: add CLAUDE.md with project conventions`
-- UI text → Spanish for now. Multi-language support (i18n) is planned for later, not a priority yet
+- UI text → Spanish only for now: `DEFAULT_LOCALE` is fixed to `'es'` and the forms create a single translation. ES/EN internationalization is planned (language switcher, initial locale from the browser, translation tabs in the forms, fallback when a translation is missing: the API returns `name: null`). Do it before building new screens
 
 ## Architecture
 
@@ -69,7 +69,6 @@ src/app/
 
 - Base URL in `environment.ts` (production) / `environment.development.ts` (local dev), never hardcoded in components
 - JWT in the `Authorization: Bearer <token>` header, handled by a central interceptor, not manually on each call
-- Before building the listing view (Phase 3): confirm GET /restaurants tests pass locally (`npm run test` in restaurants-api, with the test DB synced via `npx dotenv -e .env.test -- npx prisma migrate deploy`)
 - Same layered pattern as the backend: component → service → HTTP call, with centralized error handling
 
 ## Commands
@@ -82,8 +81,3 @@ src/app/
 
 - No `any` in TypeScript unless explicitly justified in a comment
 - Reactive Forms
-
-## Roadmap context
-
-- Phases and steps documented in Notion → "Restaurants-admin" page (5 phases, each with its own sub-items)
-- This project is also referred to as "Dashboard" in the note about replacing Maps App in the portfolio: deploying a live demo (Phase 5) is what unblocks that replacement
