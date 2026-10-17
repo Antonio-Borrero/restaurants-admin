@@ -114,6 +114,9 @@
   flex: 2;
   padding: 3rem;
   background-color: #241f1c;
+  background-image: linear-gradient(to top, #241f1ce6, #241f1c59), url('/auth-hero.webp');
+  background-size: cover;
+  background-position: center;
   h2 {
     max-width: 640px;
     font-size: 2.5rem;
