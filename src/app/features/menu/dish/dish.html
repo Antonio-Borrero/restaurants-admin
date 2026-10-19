@@ -44,8 +44,10 @@
             <p class="dish-description">{{ dish.description ?? 'Plato sin descripción' }}</p>
           </div>
           <div class="dish-allergens">
-            <h2>Alérgenos:</h2>
-            <p>{{ dish.allergens }}</p>
+            @if (dish.allergens.length) {
+              <h2>Alérgenos:</h2>
+              <p>{{ dish.allergens | allergenLabels }}</p>
+            }
           </div>
         </div>
         <div class="dish-actions">

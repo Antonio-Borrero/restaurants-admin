@@ -8,10 +8,11 @@ import { DishForm } from '../dish-form/dish-form';
 import { Dish as dishInterface } from '@shared/interfaces/menu-interface/menu-interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DeleteModal } from '@shared/components/delete-modal/delete-modal';
+import { AllergenLabelsPipe } from '../allergen-labels-pipe';
 
 @Component({
   selector: 'app-dish',
-  imports: [InitialsPipe, UpperCasePipe, CurrencyPipe, DishForm, DeleteModal],
+  imports: [InitialsPipe, UpperCasePipe, CurrencyPipe, DishForm, DeleteModal, AllergenLabelsPipe],
   templateUrl: './dish.html',
   styleUrl: './dish.scss',
 })

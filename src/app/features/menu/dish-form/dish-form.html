@@ -61,14 +61,14 @@
       <div class="dish-allergens">
         <h4>Alérgenos</h4>
         <div class="allergens-grid">
-          @for (allergen of allergens; track $index) {
+          @for (allergen of allergens; track allergen) {
             <label class="allergen">
               <input
                 type="checkbox"
                 (change)="toggleAllergen(allergen)"
                 [checked]="allergensState()[allergen]"
               />
-              <span>{{ allergen }}</span>
+              <span>{{ allergenLabels[allergen] }}</span>
             </label>
           }
         </div>

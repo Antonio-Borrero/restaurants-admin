@@ -20,7 +20,7 @@ import { Dish, NewDish } from '@shared/interfaces/menu-interface/menu-interface'
 import { environment } from '@environments/environment';
 import { map, Observable, of, switchMap } from 'rxjs';
 import { CloudinaryService } from '@shared/services/cloudinary/cloudinary-service';
-import { ALLERGENS } from '../allergens';
+import { Allergen, ALLERGEN_KEYS, ALLERGEN_LABELS, buildAllergensState } from '../allergens';
 
 @Component({
   selector: 'app-dish-form',
@@ -47,26 +47,10 @@ export class DishForm {
           originalName: dish.originalName ?? '',
           description: dish.description ?? '',
         });
-        this.allergensState.set(
-          ALLERGENS.reduce(
-            (acc, allergen) => {
-              acc[allergen] = dish.allergens.includes(allergen);
-              return acc;
-            },
-            {} as Record<string, boolean>,
-          ),
-        );
+        this.allergensState.set(buildAllergensState(dish.allergens));
       } else {
         this.form.reset();
-        this.allergensState.set(
-          ALLERGENS.reduce(
-            (acc, allergen) => {
-              acc[allergen] = false;
-              return acc;
-            },
-            {} as Record<string, boolean>,
-          ),
-        );
+        this.allergensState.set(buildAllergensState());
       }
     });
   }
@@ -76,8 +60,9 @@ export class DishForm {
   protected image = signal<File | null>(null);
   protected error = signal<string>('');
   protected currency = DEFAULT_LOCALE_CURRENCY;
-  protected allergens = ALLERGENS;
-  protected allergensState = signal<Record<string, boolean>>({});
+  protected allergens = ALLERGEN_KEYS;
+  protected allergenLabels = ALLERGEN_LABELS;
+  protected allergensState = signal<Record<Allergen, boolean>>(buildAllergensState());
 
   protected form = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
@@ -104,7 +89,7 @@ export class DishForm {
     this.close.emit();
   }
 
-  toggleAllergen(allergen: string) {
+  toggleAllergen(allergen: Allergen) {
     this.allergensState.update((state) => {
       return { ...state, [allergen]: !state[allergen] };
     });

@@ -92,7 +92,9 @@
                 <div class="dish-details">
                   <h3>{{ dish.name ?? 'Plato sin nombre' }}</h3>
                   <p>{{ dish.description }}</p>
-                  <p class="dish-allergens">Alérgenos: {{ dish.allergens }}</p>
+                  @if (dish.allergens.length) {
+                    <p class="dish-allergens">Alérgenos: {{ dish.allergens | allergenLabels }}</p>
+                  }
                 </div>
               </div>
               <span>{{ dish.price | currency: 'EUR' }}</span>
