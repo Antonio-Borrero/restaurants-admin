@@ -120,6 +120,8 @@
           <div class="image-meta">
             @if (image()) {
               <div class="image-name">{{ image()?.name }}</div>
+            } @else if (editRestaurant()?.imageUrl) {
+              <div class="image-name">Imagen actual</div>
             } @else {
               <div class="image-name">Ninguna imagen seleccionada</div>
               <div class="image-hint">JPG o PNG, hasta 5 MB</div>
