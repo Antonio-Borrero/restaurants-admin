@@ -120,7 +120,12 @@
                   [routerLink]="['/restaurants', restaurant.id]"
                   >Ver carta</a
                 >
-                <button class="btn btn-secondary">Editar</button>
+                <button
+                  class="btn btn-secondary"
+                  (click)="modal.set({ type: 'editRestaurant', restaurant })"
+                >
+                  Editar
+                </button>
               </div>
             </td>
           </tr>
