@@ -1,5 +1,7 @@
 <div>
-  <button class="btn btn-secondary back-button" (click)="location.back()">← Entradas</button>
+  <button class="btn btn-secondary back-button" (click)="location.back()">
+    ← Volver a la carta
+  </button>
   @if (mode() === 'edit') {
     <app-dish-form
       [isOpen]="true"
