@@ -64,7 +64,7 @@ export class RestaurantForm {
     address: [''],
     telephone: [''],
     email: ['', [Validators.email]],
-    description: [''],
+    description: ['', [Validators.maxLength(200)]],
   });
 
   protected selectImage() {

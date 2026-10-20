@@ -68,6 +68,35 @@
         display: flex;
         flex-direction: column;
         gap: 0.3rem;
+
+        textarea {
+          max-width: 100%;
+          line-height: 1.5;
+          letter-spacing: 0;
+          font-family: var(--font);
+          resize: none;
+          padding: 0.8rem;
+          border-radius: 10px;
+          border: 1px solid var(--border);
+          color: var(--text);
+          font-size: 1rem;
+          outline: none;
+
+          &:focus {
+            border-color: var(--primary);
+          }
+
+          &:placeholder-shown {
+            color: var(--text-muted);
+            font-size: 1rem;
+          }
+        }
+
+        p {
+          align-self: flex-end;
+          font-size: 0.8rem;
+          color: var(--text-muted);
+        }
       }
     }
 

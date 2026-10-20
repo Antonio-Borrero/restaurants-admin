@@ -36,13 +36,16 @@
 
         <div class="form-description">
           <label for="description">Descripción</label>
-          <input
-            type="text"
+          <textarea
             id="description"
             name="description"
             formControlName="description"
             placeholder="Ej: Asador especializado en carne de vaca tudanca"
-          />
+            rows="4"
+            maxlength="200"
+          ></textarea>
+
+          <p>{{ form.value.description?.length ?? 0 }}/200</p>
         </div>
       </div>
 
